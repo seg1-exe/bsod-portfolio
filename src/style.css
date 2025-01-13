@@ -1,0 +1,189 @@
+*{
+    --blue : #0176E1;
+    --white : #FFFFFF;
+    --red: #D7322D;
+}
+
+#app{
+    padding: 150px 200px;
+    background-color: var(--blue);
+    color: var(--white);
+    font-family: 'Segoe UI', sans-serif;
+    transition: background-color 0.5s ease;
+}
+
+h1{
+    font-size: 36px;
+}
+
+h2{
+    font-size: 32px;
+}
+
+h3{
+    font-size: 24px;
+}
+
+a{color: var(--white);text-decoration: underline;}
+a:visited{color: var(--white);}
+a:hover{color: var(--white);}
+
+
+
+/**Header**/
+
+header{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+header>p{
+    font-size: 256px;
+}
+
+header>h1{
+    width: 800px;
+}
+
+header>*{
+    margin-bottom: 68px;
+}
+
+header>h3{
+    display: inline;
+}
+
+#name{
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--white);
+    font-size: 24px;
+}
+
+.loader-section{
+    display: flex;
+}
+
+
+/**Main**/
+
+.project-card{
+    margin: 80px 0;
+    display: flex;
+    width: 100%;
+}
+
+.project-card-right{
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-card-right-top>h2{
+    margin-bottom: 30px;
+}
+
+.project-card-right-bottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-card-right-bottom>ul li{
+    display: inline;
+    margin-right: 10px;
+    font-style: italic;
+}
+
+/**ABOUT**/
+
+#about{
+    height: 100vh;
+    width: 100%;
+    margin-top: 200px;
+}
+
+.about-top, .about-bottom{
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 0;
+}
+
+.about-top>h2, .about-bottom>h2{
+    width: 600px;
+}
+
+/**CONTACT**/
+
+#contact{
+    height: 50vh;
+    width: 100%;
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-internet{
+    margin-top: 100px;
+}
+
+.contact-internet>ul{
+    margin-top: 30px;
+}
+
+.contact-internet>ul li{
+    display: inline;
+    margin-right: 75px;
+}
+
+.contact-internet>ul>li>a>i{
+    font-size: 75px;
+}
+
+/* Footer */
+footer{
+    display: flex;
+    margin-top: 20vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+footer>*{
+    margin: 0 10px;
+}
+
+/* Study cases */
+#work-filter li{
+    font-size: 32px;
+    display: inline;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+#work-filter li.selected {
+    text-decoration: underline;
+}
+
+.study-case>.study-case-title{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.study-case-title>img{
+    margin-right: 30px;
+}
+
+.study-case>section{
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 0;
+    width: 100%;
+}
+
+.study-case>section>h3, .study-case>section>img, .study-case>section>video{
+    width: 600px;
+}
