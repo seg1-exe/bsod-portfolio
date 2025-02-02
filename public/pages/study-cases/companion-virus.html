@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/icon.png" />
+    <link rel="stylesheet" href="/src/reset.css">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/github-markdown-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/847debfb6c.js" crossorigin="anonymous"></script>
+    <script src="/src/main.js" type="module"></script>
+    <title>Arthur Gillier</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <p class="animated-section-top">:)</p>
+        <h1 class="animated-section-left">Your PC ran into this case study and needs to explore it.</h1>
+        <h3 class="animated-section-left">For more info on : COMPANION_VIRUS_CASE_STUDY</h3>
+        <a class="animated-section-left" href="/pages/study-cases.html"><i class="fa-solid fa-arrow-left"></i> Go back</a>
+      </header>
+      <main class="study-case">
+        <section class="study-case-title">
+            <img class="animated-section-left" src="/images/cases-img/virus.png">
+            <section class="animated-section-right">
+                <h1>Companion virus</h1>
+                <h3>an academic project involving the creation and implementation of a companion virus in C language</h3>
+            </section>
+        </section>
+
+        <section>
+            <h3 class="animated-section-left">This project involves the design and implementation of a functional companion virus, with credible utilities, in order to experiment with the propagation, infection and concealment mechanisms specific to computer viruses in an educational security context.<br>Through their photos, they convey their roots, their relationship to those who keep their skills alive to light, warmth and color. </h2>
+        </section>
+
+        <div class="markdown-report">
+            <h1 class="animated-section-left">Project report</h1>
+            <button class="language-btn animated-section-left" onclick="toggleLanguage()">FR</button>
+            <div class="english-report markdown-body">
+                <h1 id="companion-virus-design-project">Companion Virus Design Project</h1>
+                <p><strong>Pierre Girault & Arthur Gillier</strong></p>
+                <ul>
+                    <li><a href="#companion-virus-design-project">Companion Virus Design Project</a></li>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#project-context">Project Context</a></li>
+                    <li><a href="#concept-of-companion-virus">Concept of Companion Virus</a></li>
+                    <li><a href="#objectives">Objectives</a></li>
+                    <li><a href="#project-organization">Project Organization</a></li>
+                    <li><a href="#development-of-utilities">Development of Utilities</a></li>
+                    <li><a href="#mediaplayer-and-virus-propagation">MediaPlayer and Virus Propagation</a></li>
+                    <li><a href="#virus-propagation-mechanisms">Virus Propagation Mechanisms</a></li>
+                    <li><a href="#obfuscation-and-security">Obfuscation and Security</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                    <li><a href="#reflection-on-ethics-and-security">Reflection on Ethics and Security</a></li>
+                    <li><a href="#acknowledgments">Acknowledgments</a></li>
+                </ul>
+                <h2 id="introduction">Introduction</h2>
+                <p>As part of our university studies in computer science, we had the opportunity to complete a project designing a companion virus as part of our cybersecurity course, supervised by Mr. Franco and Mr. Bouju. This project had a specific educational goal: to study and understand the propagation of viruses, particularly companion viruses, in a controlled environment. The main objective was to learn how to develop virus propagation in an academic context, rather than to create a real virus intended for malicious purposes.</p>
+                <h2 id="project-context">Project Context</h2>
+                <p>The project consisted of creating a companion virus, where the infected program hides under the name of a legitimate file, thus tricking the user into executing the malicious program. We were provided with a CD-ROM containing images and a fictitious application called <strong>MediaPlayer.exe</strong>, which was supposed to read images, but in reality, served as a vector to propagate the virus.</p>
+                <p>The virus had to infect other executable files in the same directory as the MediaPlayer.exe program, all while pretending to be a legitimate file to avoid raising the user&#39;s suspicions. The project was carried out in a <strong>Linux Ubuntu</strong> environment, and the virus propagation focused on this operating system to simulate a real-world scenario in an academic context. This work also served an educational purpose, deepening our knowledge of cybersecurity.</p>
+                <h2 id="concept-of-companion-virus">Concept of Companion Virus</h2>
+                <p>A <strong>companion virus</strong> is a specific type of malware that hides under the name of a legitimate program, usually an executable file, to deceive the user. It differs from traditional viruses by its propagation method: instead of running by itself, it waits for a legitimate file to be executed by the user to spread. The infected program therefore contains the virus but initially launches as if it were the original program, making it difficult to detect.</p>
+                <p>In essence, the companion virus acts as a &quot;parasite,&quot; adopting the name and path of a legitimate executable file. The user thus believes they are running a normal application, while in reality, the virus runs first, before handing control over to the legitimate program to hide its presence and avoid suspicion. Once executed, the virus seeks out other executable files in the target directory and infects them in turn, continuing its propagation. This approach allows the companion virus to effectively hide while spreading among the files.</p>
+                <p>The steps of infection in a companion virus can be summarized as follows:</p>
+                <ol>
+                <li><strong>Initial Infection</strong>: When a user executes the malicious program, it renames the executable files in the directory and replaces them with copies of itself. The legitimate program is then executed.</li>
+                <li><strong>Subsequent Infections</strong>: The infected files become vectors for propagation as soon as they are executed.</li>
+                </ol>
+                <h2 id="objectives">Objectives</h2>
+                <p>The main objectives of the project were:</p>
+                <ol>
+                <li><strong>Develop a credible MediaPlayer</strong>: Create a functional program capable of reading images in various formats (.jpg, .png, .bmp), which would serve as a vector for the virus execution.</li>
+                <li><strong>Create utilities</strong>: Develop several simple utilities that would be infected by the virus. These utilities must interact with the user and perform simple tasks like generating passwords or performing calculations.</li>
+                <li><strong>Implement virus propagation</strong>: Design the mechanism by which the virus replicates and infects executable files in the directory. This should occur through initial infection and subsequent infections, with each executed program becoming a vector for propagation.</li>
+                </ol>
+                <h2 id="project-organization">Project Organization</h2>
+                <p>Since we were working exclusively in <strong>person at the university</strong>, we chose to organize the development of the project in pairs. This approach allowed us to effectively divide tasks while working closely together to develop the virus and utilities.</p>
+                <ul>
+                <li><strong>Pierre</strong> developed the <strong>MediaPlayer.exe</strong> program and the <strong>MonPG4</strong> utility.</li>
+                <li><strong>Arthur</strong> handled the creation of the other utilities (MonPG1, MonPG2, MonPG3, MonPG5).</li>
+                </ul>
+                <p>To facilitate project management, we used <strong>Gitlab</strong> for version control, allowing us to centralize the code and collaborate smoothly, while ensuring continuous integration of the different parts of the project.</p>
+                <h2 id="development-of-utilities">Development of Utilities</h2>
+                <p>The utilities developed fulfilled specific criteria: they had to perform a useful task, display a graphical interface, and interact with the user. Here are the utilities created:</p>
+                <ul>
+                <li><strong>MonPG1</strong>: A password generator.</li>
+                <li><strong>MonPG2</strong>: A basic calculator for simple operations.</li>
+                <li><strong>MonPG3</strong>: A calculator for the hypotenuse based on the Pythagorean theorem.</li>
+                <li><strong>MonPG4</strong>: A simple timer with a start/stop button and reset functionality.</li>
+                <li><strong>MonPG5</strong>: A &quot;guess the price&quot; game where the user must guess a number chosen by the computer.</li>
+                </ul>
+                <h2 id="mediaplayer-and-virus-propagation">MediaPlayer and Virus Propagation</h2>
+                <p>The <strong>MediaPlayer.exe</strong> program was designed to resemble a legitimate image viewer application. Its primary role was to convince the user to execute it. Upon execution, it carried out the following actions:</p>
+                <ol>
+                <li>During the <strong>initial infection</strong>, the virus renames the existing executables in the target directory with the <code>.old</code> extension and creates a copy of itself under the original file names.</li>
+                <li>During <strong>subsequent infections</strong>, each executed program contained a copy of the virus, which continued to propagate the infection to other executable files in the directory.</li>
+                </ol>
+                <h2 id="virus-propagation-mechanisms">Virus Propagation Mechanisms</h2>
+                <p>The companion virus uses a simple strategy of renaming and duplicating executable files to hide and propagate itself. During infection, the following steps are carried out:</p>
+                <ol>
+                <li><strong>Renaming</strong> the target file with the <code>.old</code> extension.</li>
+                <li><strong>Creating</strong> a copy of the virus under the original file name, allowing the legitimate program to continue running without alerting the user.</li>
+                <li><strong>Verification</strong> to avoid re-infecting already compromised files.</li>
+                </ol>
+                <h2 id="obfuscation-and-security">Obfuscation and Security</h2>
+                <p>We studied code obfuscation to make the virus harder to analyze and detect. Although time constraints prevented us from implementing complete obfuscation, we explored tools such as <strong>ioccc.org</strong>, which allow the code to be rewritten in a less readable format.</p>
+                <h2 id="conclusion">Conclusion</h2>
+                <p>This project of developing a companion virus was an enriching experience in the field of cybersecurity. It allowed us to understand the propagation mechanisms of viruses while respecting an educational framework. Although the virus was not intended to cause harm, the objective was to better understand the behavior of viruses and learn how to protect against them.</p>
+                <h2 id="reflection-on-ethics-and-security">Reflection on Ethics and Security</h2>
+                <p>Studying viruses and their propagation in an academic setting is essential to better prevent real-world attacks. The project made us aware of the risks associated with the spread of malware and the importance of securing systems and applications. As computer science students, we believe it is crucial to learn how to recognize and understand security flaws to better counter them.</p>
+                <h2 id="acknowledgments">Acknowledgments</h2>
+                <p>I would like to sincerely thank our professors, Mr. Franco and Mr. Bouju, for their guidance and support throughout this project. A special thanks to Pierre, my teammate, for his collaboration and dedication. Finally, due to the confidential nature of the project, the source code for this application is unfortunately not available.</p>
+            </div>
+
+            <div class="french-report markdown-body" style="display: none;">
+                <h1 id="projet-de-conception-d-un-virus-compagnon">Projet de Conception d&#39;un Virus Compagnon</h1>
+                <p><strong>Pierre Girault &amp; Arthur Gillier</strong></p>
+                <ul>
+                <li><a href="#projet-de-conception-dun-virus-compagnon">Projet de Conception d&#39;un Virus Compagnon</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#contexte-du-projet">Contexte du projet</a></li>
+                <li><a href="#concept-de-virus-compagnon">Concept de Virus Compagnon</a></li>
+                <li><a href="#objectifs">Objectifs</a></li>
+                <li><a href="#organisation-du-projet">Organisation du projet</a></li>
+                <li><a href="#développement-des-utilitaires">Développement des utilitaires</a></li>
+                <li><a href="#mediaplayer-et-la-propagation-du-virus">MediaPlayer et la propagation du virus</a></li>
+                <li><a href="#les-mécanismes-de-propagation">Les mécanismes de propagation</a></li>
+                <li><a href="#obfuscation-et-sécurité">Obfuscation et sécurité</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#réflexion-sur-léthique-et-la-sécurité">Réflexion sur l’éthique et la sécurité</a></li>
+                <li><a href="#remerciements">Remerciements</a></li>
+                </ul>
+                <h2 id="introduction">Introduction</h2>
+                <p>Dans le cadre de notre cursus universitaire en informatique, nous avons eu l&#39;occasion de réaliser un projet de conception d&#39;un virus compagnon dans le cadre du cours de sécurité informatique, encadré par M. Franco et M. Bouju. Ce projet avait un objectif pédagogique spécifique : étudier et comprendre la propagation des virus, en particulier les virus compagnons, dans un environnement contrôlé. Il s&#39;agissait principalement d&#39;apprendre à développer la propagation d&#39;un virus dans un contexte académique, et non de créer un virus réel destiné à nuire.</p>
+                <h2 id="contexte-du-projet">Contexte du projet</h2>
+                <p>Le projet consistait à créer un virus compagnon, où le programme infecté se cache sous le nom d’un fichier légitime, trompant ainsi l&#39;utilisateur pour qu&#39;il exécute le programme malveillant. Nous avons été fournis avec un CD-ROM contenant des images et une application fictive appelée MediaPlayer.exe, qui était censée lire des images, mais en réalité, elle servait de vecteur pour propager le virus.</p>
+                <p>Le virus devait infecter les autres fichiers exécutables présents dans le même répertoire que le programme MediaPlayer.exe, tout en se faisant passer pour un fichier légitime afin de ne pas éveiller les soupçons de l&#39;utilisateur. Le projet s&#39;est inscrit dans un environnement Linux Ubuntu, et la propagation du virus s&#39;est concentrée sur ce système d&#39;exploitation afin de simuler un cas réel dans un cadre académique. Ce travail s&#39;inscrivait également dans une démarche pédagogique visant à approfondir nos connaissances en sécurité informatique.</p>
+                <h2 id="concept-de-virus-compagnon">Concept de Virus Compagnon</h2>
+                <p>Le virus compagnon est un type particulier de malware qui se cache sous le nom d’un programme légitime, souvent un fichier exécutable, afin de duper l’utilisateur. Il se distingue des virus classiques par sa méthode de propagation : plutôt que de s&#39;exécuter seul, il attend qu&#39;un fichier légitime soit exécuté par l&#39;utilisateur pour se propager. Le programme infecté contient donc le virus, mais il se lance dans un premier temps comme s&#39;il s&#39;agissait du programme original, ce qui le rend difficile à détecter.</p>
+                <p>Concrètement, le virus compagnon agit comme une sorte de &quot;parasite&quot; en prenant le nom et le chemin d’un fichier exécuté légitime. L’utilisateur croit ainsi exécuter une application normale, alors qu&#39;en réalité, le virus s’exécute en premier, avant de passer la main au programme légitime pour masquer sa présence et éviter de susciter des soupçons. Une fois exécuté, le virus cherche d’autres fichiers exécutables dans le répertoire cible et les infecte à leur tour, continuant ainsi sa propagation. Cette approche permet au virus compagnon de se cacher efficacement tout en continuant à se propager parmi les fichiers.</p>
+                <p>Les étapes d&#39;infection d&#39;un virus compagnon peuvent se résumer comme suit :</p>
+                <ol>
+                <li>Infection initiale : Lorsqu&#39;un utilisateur exécute le programme malveillant, ce dernier renomme les fichiers exécutables présents dans le répertoire et les remplace par des copies de lui-même. Le programme légitime est ensuite exécuté.</li>
+                <li>Infections ultérieures : Les fichiers infectés à leur tour deviennent des vecteurs de propagation dès qu&#39;ils sont exécutés.</li>
+                </ol>
+                <h2 id="objectifs">Objectifs</h2>
+                <p>Les principaux objectifs du projet étaient :</p>
+                <ol>
+                <li>Développer un MediaPlayer crédible : Créer un programme fonctionnel capable de lire des images dans des formats variés (.jpg, .png, .bmp), qui servirait de vecteur pour l&#39;exécution du virus.</li>
+                <li>Créer des utilitaires : Développer plusieurs utilitaires simples destinés à être infectés par le virus. Ces utilitaires doivent interagir avec l&#39;utilisateur et réaliser des tâches simples comme la génération de mots de passe ou la simulation de calculs.</li>
+                <li>Implémenter la propagation du virus : Concevoir le mécanisme par lequel le virus se réplique et s&#39;infecte à travers les fichiers exécutables dans le répertoire. Cela devait se faire sous la forme d&#39;une infection initiale et d&#39;infections ultérieures, chaque programme exécuté devenant un vecteur de propagation.</li>
+                </ol>
+                <h2 id="organisation-du-projet">Organisation du projet</h2>
+                <p>Étant donné que nous travaillions exclusivement en présentiel à l&#39;université, nous avons choisi d&#39;organiser le développement du projet en binôme. Cette approche nous a permis de diviser efficacement les tâches tout en travaillant en collaboration étroite pour développer le virus et les utilitaires.</p>
+                <ul>
+                <li>Pierre a conçu le programme MediaPlayer.exe et l&#39;utilitaire MonPG4.</li>
+                <li>Arthur a pris en charge la création des autres utilitaires (MonPG1, MonPG2, MonPG3, MonPG5).</li>
+                </ul>
+                <p>Pour faciliter la gestion du projet, nous avons utilisé Gitlab pour la gestion de version, permettant ainsi de centraliser le code et de collaborer de manière fluide, tout en assurant une intégration continue des différentes parties du projet.</p>
+                <h2 id="d-veloppement-des-utilitaires">Développement des utilitaires</h2>
+                <p>Les utilitaires développés remplissaient des critères spécifiques : ils devaient réaliser une tâche utile, afficher une interface graphique et interagir avec l&#39;utilisateur. Voici les utilitaires créés :</p>
+                <ul>
+                <li>MonPG1 : Un générateur de mots de passe.</li>
+                <li>MonPG2 : Une calculatrice basique pour les opérations simples.</li>
+                <li>MonPG3 : Un calculateur d&#39;hypoténuse basé sur le théorème de Pythagore.</li>
+                <li>MonPG4 : Un minuteur simple avec un bouton pour démarrer/arrêter et réinitialiser.</li>
+                <li>MonPG5 : Un jeu du juste prix où l&#39;utilisateur doit deviner un nombre choisi par l&#39;ordinateur.</li>
+                </ul>
+                <h2 id="mediaplayer-et-la-propagation-du-virus">MediaPlayer et la propagation du virus</h2>
+                <p>Le programme MediaPlayer.exe était conçu pour ressembler à une application légitime de lecture d&#39;images. Son rôle principal était de convaincre l&#39;utilisateur de l&#39;exécuter. Lors de l&#39;exécution, il effectuait les actions suivantes :</p>
+                <ol>
+                <li>Lors de la première infection, le virus renomme les exécutables existants dans le répertoire cible avec l&#39;extension .old et crée une copie de lui-même sous les noms des fichiers originaux.</li>
+                <li>Lors des infections ultérieures, chaque programme exécuté contenait une copie du virus, qui continuait à propager l&#39;infection à d&#39;autres fichiers exécutables du répertoire.</li>
+                </ol>
+                <h2 id="les-m-canismes-de-propagation">Les mécanismes de propagation</h2>
+                <p>Le virus compagnon utilise une stratégie simple de renommage et de duplication des fichiers exécutables pour se cacher et se propager. Lors de l&#39;infection, les étapes suivantes sont réalisées :</p>
+                <ol>
+                <li>Renommage du fichier cible avec l&#39;extension .old.</li>
+                <li>Création d&#39;une copie du virus sous le nom du fichier d&#39;origine, permettant au programme légitime de continuer à fonctionner sans alerter l&#39;utilisateur.</li>
+                <li>Vérification pour éviter de réinfecter les fichiers déjà compromis.</li>
+                </ol>
+                <h2 id="obfuscation-et-s-curit-">Obfuscation et sécurité</h2>
+                <p>Nous avons étudié l&#39;obfuscation du code pour rendre le virus plus difficile à analyser et à détecter. Bien que le temps ait manqué pour implémenter une obfuscation complète, nous avons exploré des outils comme ioccc.org, qui permettent de rendre le code plus opaque en le réécrivant dans un format moins lisible.</p>
+                <h2 id="conclusion">Conclusion</h2>
+                <p>Ce projet de développement d&#39;un virus compagnon a été une expérience enrichissante dans le domaine de la sécurité informatique. Il nous a permis de comprendre les mécanismes de propagation des virus tout en respectant un cadre pédagogique. Bien que le virus n&#39;ait pas été conçu pour nuire, l&#39;objectif était de mieux comprendre le comportement des virus et d&#39;apprendre à s&#39;en protéger.</p>
+                <h2 id="r-flexion-sur-l-thique-et-la-s-curit-">Réflexion sur l’éthique et la sécurité</h2>
+                <p>L&#39;étude des virus et de leur propagation dans un cadre universitaire est essentielle pour mieux prévenir les attaques réelles. Le projet nous a permis de prendre conscience des risques associés à la propagation de malwares, et de l&#39;importance de sécuriser les systèmes et les applications. En tant qu&#39;étudiants en informatique, nous pensons qu&#39;il est crucial d&#39;apprendre à reconnaître et à comprendre les failles de sécurité pour mieux les contrer.</p>
+                <h2 id="remerciements">Remerciements</h2>
+                <p>Je tenais à remercier chaleureusement nos professeurs, M. Franco et M. Bouju, pour leur accompagnement et leurs conseils tout au long de ce projet. Un grand merci également à Pierre, mon binôme, pour sa collaboration et son investissement. Enfin, en raison de la nature confidentielle du projet, le code source de cette application n&#39;est malheureusement pas disponible.</p>
+                <h2 id="auteurs">Auteurs</h2>
+                <li>Arthur Gillier</li>
+                <li>Pierre Girault</li>
+                <li>Rédaction aidée par ChatGPT</li>
+                <li>Sujet : Université de La Rochelle.</li>
+            </div>
+
+        </div>
+
+        <section class="related-cases">
+          <h2 class="animated-section-left">Take a look at the next cases</h3>
+          <div class="cases-list">
+            <a href="/pages/study-cases/smartphone-application.html">
+              <img src="/images/cases-img/smartphoneApp.png">
+              <div>
+                <h3>Smartphone development project</h3>
+                <p>Developing an 8 checkers application for smartphones, including help functions, customization (background, colors, pieces), and a polished interface to offer an immersive, modular user experience.</p>
+              </div>
+            </a>
+            <a href="/pages/study-cases/lowkey.html">
+              <img src="/images/cases-img/lowkey.png">
+              <div>
+                <h3>“Lowkey” - Web development project</h3>
+                <p>“Lowkey” is a web application featuring articles written by the Lowkey media. Using Symfony technology for the backend and VueJS for the frontend.</p>
+              </div>
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <a href="/index.html">Homepage</a>
+        <a href="/index.html#about">About</a>
+        <a href="/index.html#contact">Contact</a>
+        <a href="/pages/study-cases.html">Study cases</a>
+      </footer>
+    </div>
+  </body>
+  <script src="/src/main.js"></script>
+</html>

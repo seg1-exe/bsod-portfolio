@@ -11,51 +11,93 @@
   </head>
   <body>
     <div id="app">
+      <div class="flair flair--3" id="cursorText"></div>
+      <div class="player-ctn">
+        <div class="btn-ctn">
+          <div class="btn-mute" id="toggleMute" onclick="toggleMute()">
+             <div id="btn-faws-volume">
+               <i id="icon-vol-up" class='fas fa-volume-up'></i>
+               <i id="icon-vol-mute" class='fas fa-volume-mute' style="display: none"></i>
+             </div>
+          </div>
+          <div class="music-info">
+            <div class="timer">00:00</div>
+            <div id="myProgress">
+              <div id="myBar"></div>
+            </div>
+            <div class="duration">03:26</div>
+          </div>
+        
+        </div>
+        <div class="player-infos">
+          <div class="title">SOUTH IN PARIS - Nelsonnn</div>
+        </div>
+      </div>
       <header>
-        <p>:)</p>
-        <h1>Your PC ran into this case study and needs to explore it.</h1>
-        <h3>For more info on : ARGENTEURS_CASE_STUDY</h3>
-        <a href="/pages/study-cases.html"><i class="fa-solid fa-arrow-left"></i> Go back</a>
+        <p class="animated-section-top">:)</p>
+        <h1 class="animated-section-left">Your PC ran into this case study and needs to explore it.</h1>
+        <h3 class="animated-section-left">For more info on : ARGENTEURS_CASE_STUDY</h3>
+        <a class="animated-section-left" href="/pages/study-cases.html"><i class="fa-solid fa-arrow-left"></i> Go back</a>
       </header>
       <main class="argenteurs study-case">
         <section class="study-case-title">
-            <img src="/images/cases-img/argenteurs.png">
-            <section>
+            <img class="animated-section-left" src="/images/cases-img/argenteurs.png">
+            <section class="animated-section-right">
                 <h1>Argenteurs</h1>
                 <h3>a webdesign concept made on <a href="https://www.figma.com/">Figma</a></h3>
             </section>
         </section>
 
         <section>
-            <h3>Argenteurs is a collective of silver-based photographers from the south of France. <br>Through their photos, they convey their roots, their relationship to those who keep their skills alive to light, warmth and color. </h2>
-            <img src="/images/argenteurs/argenteurs1.png">
+            <h3 class="animated-section-left"><a href="https://www.instagram.com/argenteurs/">Argenteurs</a> is a collective of silver-based photographers from the south of France. <br>Through their photos, they convey their roots, their relationship to those who keep their skills alive to light, warmth and color. </h2>
+            <img class="animated-section-right" src="/images/argenteurs/argenteurs1.png">
         </section>
 
         <section>
-            <img src="/images/argenteurs/argenteurs2.png">
-            <h3>Through two photo collections, they were able to convey their visions of the South, rural life and music.<br><br>And thanks to their website, they were able to share their vision with France and the world.</h2>
+            <img class="animated-section-left" src="/images/argenteurs/argenteurs2.png">
+            <h3 class="animated-section-right">Through two photo collections, they were able to convey their visions of the South, rural life and music.<br><br>And thanks to their website, they were able to share their vision with France and the world.</h2>
         </section>
 
         <section>
-            <h3>In November 2024, they are organizing an event combining photography and music with “South in Paris”. A photo exhibition of their collection and concerts and djsets by artists from the south of France. It was after this event that I decided to rework their website in my own way.</h2>
-            <video controls>
+            <h3 class="animated-section-left">In November 2024, they are organizing an event combining photography and music with “South in Paris”. A photo exhibition of their collection and concerts and djsets by artists from the south of France. It was after this event that I decided to rework their website in my own way.</h2>
+            <video controls class="animated-section-right video">
                 <source src="/images/argenteurs/les-voix-du-sud.mp4" type="video/mp4">
             </video>
         </section>
 
         <section>
             <img src="/images/argenteurs/homepage.png" class="bigImg">
-            <h3>I decided to highlight orange, a dominant color in their photographs and posters, with a black background for a striking contrast. I kept the header of the homepage fairly uncluttered so as not to lose the user. To recall the rural side they convey through their work, I preferred to use “La Gazette” rather than a “News” section. Finally, the navigation bar is light, so that only the most important elements remain: the photo gallery, the latest events and a contact page.</h2>
+            <h3 class="animated-section-right">I decided to highlight orange, a dominant color in their photographs and posters, with a black background for a striking contrast. I kept the header of the homepage fairly uncluttered so as not to lose the user. To recall the rural side they convey through their work, I preferred to use “La Gazette” rather than a “News” section. Finally, the navigation bar is light, so that only the most important elements remain: the photo gallery, the latest events and a contact page.</h2>
         </section>
 
-        <section>
+        <section >
             <h3>The page to commemorate the “South in Paris” collection and the event of the same name remains very simplistic to highlight the multimedia work put in place for this event. The first video teases the event and whets our appetite for the photo collection. A selection of photos recounting the music event. And finally, a summary video to bring you back up to date.</h2>
             <img src="/images/argenteurs/south-in-paris.png" class="bigImg">
         </section>
 
-        <video controls style="width: 100%;">
-            <source src="/images/argenteurs/videoargenteurs.mp4" type="video/mp4">
-        </video>
+        <section>
+          <h3 class="animated-section-left">Thanks to <a href="https://www.instagram.com/argenteurs/">Argenteurs</a> for allowing me to use their photos and graphic identity. Thanks to <a href="https://www.instagram.com/nulsonnn/">Nelsonnnn</a> for allowing me to use his music on this page.</h3>
+        </section>
+
+        <section class="related-cases">
+          <h2 class="animated-section-left">Take a look at the next cases</h3>
+          <div class="cases-list">
+            <a href="/pages/study-cases/esone.html">
+              <img src="/images/cases-img/esone.png">
+              <div>
+                <h3>0-119</h3>
+                <p>Design and development work around the musical project “0-119” by a French musical artist.</p>
+              </div>
+            </a>
+            <a href="/pages/study-cases/recipe-app.html">
+              <img src="/images/cases-img/recipeApp.png">
+              <div>
+                <h3>Recipe processing application</h3>
+                <p>The aim of this project is to manipulate and analyze a set of recipes in XML format, using a functional programming approach in Java.</p>
+              </div>
+            </a>
+          </div>
+        </section>
       </main>
 
       <footer>
@@ -66,4 +108,106 @@
       </footer>
     </div>
   </body>
+  <script>
+    const music = new Audio('/images/argenteurs/SOUTH_IN_PARIS.mp3');
+    const video = document.querySelector('.video');
+    const cursorText = document.getElementById('cursorText');
+    const titleElement = document.querySelector('.title');
+    const durationElement = document.querySelector('.duration');
+    const timerElement = document.querySelector('.timer');
+    const progressBar = document.getElementById('myBar');
+    const playerContainer = document.querySelector('.player-ctn');
+    
+    var isPlaying = false;
+    var wasMusicPlaying = false;
+    var isVideoPlaying = false;
+    var isSeeking = false;
+    music.loop = true;
+    cursorText.textContent = 'Click to enable sound';
+    
+    function playMusic() {
+      isPlaying ? music.pause() : music.play();
+    }
+
+    document.addEventListener('click', () => {
+      if (!isPlaying) {
+        playMusic();
+        playerContainer.classList.add('player-ctn-visible');
+      }
+      cursorText.style.display = "none"; 
+    });
+
+    music.onplaying = function () {
+      isPlaying = true;
+    };
+    
+    music.onpause = function () {
+      isPlaying = false;
+    };
+    
+    // mute function
+    window.toggleMute = function() {
+      const volUpIcon = document.getElementById('icon-vol-up');
+      const volMuteIcon = document.getElementById('icon-vol-mute');
+    
+      music.muted = !music.muted;
+      volUpIcon.style.display = music.muted ? 'none' : 'inline';
+      volMuteIcon.style.display = music.muted ? 'inline' : 'none';
+    };
+    
+    music.addEventListener('timeupdate', function() {
+      const currentTime = music.currentTime;
+      timerElement.textContent = getMinutes(currentTime);
+    
+      const progress = (currentTime / music.duration) * 100;
+      progressBar.style.width = progress + '%';
+    
+    });
+    
+    function getMinutes(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec.toString().padStart(2, '0')}`;
+    }
+    
+    video.addEventListener('play', () => {
+      isVideoPlaying = true;
+      if (isPlaying) {
+        wasMusicPlaying = true;
+        music.pause();
+        playIcon.style.display = 'inline';
+        pauseIcon.style.display = 'none';
+      } else {
+        wasMusicPlaying = false;
+      }
+    });
+
+    video.addEventListener('pause', () => {
+      if (!isSeeking && isVideoPlaying && wasMusicPlaying) {
+        music.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'inline';
+      }
+      isVideoPlaying = false;
+    });
+
+    video.addEventListener('seeking', () => {
+      isSeeking = true;
+    });
+
+    video.addEventListener('seeked', () => {
+      isSeeking = false;
+    });
+
+    video.addEventListener('ended', () => {
+      if (wasMusicPlaying) {
+        music.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'inline';
+      }
+      isVideoPlaying = false;
+    });
+  </script>
+  <script src="/src/main.js"></script>
+  <script src="/src/gsap.js" type="module"></script>
 </html>

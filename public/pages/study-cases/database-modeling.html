@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/icon.png" />
+    <link rel="stylesheet" href="/src/reset.css">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/github-markdown-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/847debfb6c.js" crossorigin="anonymous"></script>
+    <script src="/src/main.js" type="module"></script>
+    <title>Arthur Gillier</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <p class="animated-section-top">:)</p>
+        <h1 class="animated-section-left">Your PC ran into this case study and needs to explore it.</h1>
+        <h3 class="animated-section-left">For more info on : DATABASE_MODELING_CASE_STUDY</h3>
+        <a class="animated-section-left" href="/pages/study-cases.html"><i class="fa-solid fa-arrow-left"></i> Go back</a>
+      </header>
+      <main class="study-case">
+        <section class="study-case-title">
+            <img class="animated-section-left" src="/images/cases-img/databaseModeling.png">
+            <section class="animated-section-right">
+                <h1>Databse modeling</h1>
+                <h3>Modeling and analysis of historical data in PostgreSQL.</h3>
+            </section>
+        </section>
+
+        <section>
+            <h3 class="animated-section-left">This project relates to the modeling, cleansing and analysis of historical marriage data from departmental archives. It implements the principles of standardization and relational database management in PostgreSQL, structuring data according to a standardized relational schema.</h2>
+        </section>
+
+        <div class="markdown-report">
+            <h1 class="animated-section-left">Project report</h1>
+            <button class="language-btn animated-section-left" onclick="toggleLanguage()">FR</button>
+            <div class="english-report markdown-body">
+                <h1 id="database-modeling-project">Database modeling project</h1>
+                <p><strong>Arthur Gillier - Florian Chacun</strong></p>
+                <h2 id="summary">Summary</h2>
+                <p>This report presents a modeling, cleaning, and analysis project of a historical dataset extracted from departmental marriage archives. The goal is to demonstrate mastery of relational modeling principles, normalization, and relational database management using PostgreSQL. After conceptualizing the schema, cleaning the source data, and inserting it into the defined tables, various queries were executed to answer specific questions (quantities of records, municipalities, time periods, etc.). The results validate the approach, despite the data being occasionally incomplete or noisy. Finally, this work discusses the challenges encountered, as well as possible improvements, particularly for processing a larger file (500k rows).</p>
+                <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#methodological-and-theoretical-framework">Methodological and Theoretical Framework</a></li>
+                <li><a href="#database-conceptualization-and-modeling">Database Conceptualization and Modeling</a><ul>
+                <li><a href="#data-description">Data Description</a></li>
+                <li><a href="#definition-of-tables-and-attributes">Definition of Tables and Attributes</a></li>
+                <li><a href="#primary-and-foreign-key-management">Primary and Foreign Key Management</a></li>
+                <li><a href="#relationships-between-tables">Relationships Between Tables</a></li>
+                </ul>
+                </li>
+                <li><a href="#database-schema">Database Schema</a></li>
+                <li><a href="#relational-schema-normalization">Relational Schema Normalization</a><ul>
+                <li><a href="#normalization-principles">Normalization Principles</a></li>
+                </ul>
+                </li>
+                <li><a href="#table-creation">Table Creation</a><ul>
+                <li><a href="#-departement-table">Departement Table</a></li>
+                <li><a href="#-type-table">Type d&#39;Acte Table</a></li>
+                <li><a href="#-commune-table">Commune Table</a></li>
+                <li><a href="#-personne-table">Personne Table</a></li>
+                <li><a href="#-acte-table">Acte Table</a></li>
+                </ul>
+                </li>
+                <li><a href="#data-cleaning-transformation-and-insertion-procedures">Data Cleaning, Transformation, and Insertion Procedures</a><ul>
+                <li><a href="#record-extraction">Record Extraction</a></li>
+                <li><a href="#adding-relationships">Adding Relationships</a><ul>
+                <li><a href="#acte-commune">Acte -&gt; Municipality</a></li>
+                <li><a href="#acte-personne-a-b-">Acte -&gt; Personne A &amp; B</a></li>
+                </ul>
+                </li>
+                </ul>
+                </li>
+                <li><a href="#results-and-analysis-queries">Results and Analysis Queries</a></li>
+                <li><a href="#challenges-and-limitations">Challenges and Limitations</a></li>
+                <li><a href="#future-improvements">Future Improvements</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#authors">Authors</a></li>
+                </ul>
+                <h2 id="introduction">Introduction</h2>
+                <p>The aim of this project, carried out as part of the Database Modeling course at the University of La Rochelle, was to put into practice the skills acquired in the design, standardization and manipulation of relational databases. The aim was to use a historical dataset of marriages, with heterogeneous and sometimes imperfect attributes, to create a usable relational database.
+                This project consolidates the knowledge acquired in SQL, reinforces the understanding of normalization and provides an insight into the management of real, often imperfect, data. The expected result is a system enabling users (genealogists, demographers) to consult and analyze marriage data efficiently.</p>
+                <h2 id="methodological-and-theoretical-framework">Methodological and Theoretical Framework</h2>
+                <p>The project is based on the fundamentals of relational modeling and best practices established in the DBMS community. Data has been structured according to the principles of the first three normal forms (1NF, 2NF, 3NF) to reduce redundancy, improve consistency and facilitate updating.
+                In particular, normalization ensures that each relationship contains only atomic attributes, that partial dependencies are eliminated, and that no transitive dependencies between non-key attributes exist. In addition, by respecting ACID properties (Atomicity, Consistency, Isolation, Durability) and following relational modeling standards, the system gains in robustness, maintainability and scalability.</p>
+                <h2 id="database-conceptualization-and-modeling">Database Conceptualization and Modeling</h2>
+                <p>The first step in this project is to understand the data provided and model it in such a way as to meet the initial need.</p>
+                <h3 id="data-description">Data Description</h3>
+                <p>The data is extracted from the Vendée departmental archives and includes detailed information on registered marriages. Each record contained in the file mariages_L3_5k.csv includes the following columns:</p>
+                <pre><code class="lang-bash"><span class="hljs-bullet">1. </span>Act identifier 
+                <span class="hljs-bullet">2. </span>Act type
+                <span class="hljs-bullet">3. </span>Name of person A
+                <span class="hljs-bullet">4. </span>First name person A
+                <span class="hljs-bullet">5. </span>First name father person A 
+                <span class="hljs-bullet">6. </span>Last name mother person A
+                <span class="hljs-bullet">7. </span>First name mother person A 
+                <span class="hljs-bullet">8. </span>Last name person B
+                <span class="hljs-bullet">9. </span>First name person B
+                <span class="hljs-bullet">10. </span>First name father person B 
+                <span class="hljs-bullet">11. </span>Last name mother person B 
+                <span class="hljs-bullet">12. </span>First name mother person B 
+                <span class="hljs-bullet">13. </span>Town
+                <span class="hljs-bullet">14. </span>Department 
+                <span class="hljs-bullet">15. </span>Date
+                </code></pre>
+                <h3 id="definition-of-tables-and-attributes">Definition of Tables and Attributes</h3>
+                <p>Based on the data description, we have identified several entities: deeds, persons, deed types, communes and départements. Each entity will be represented by a table or enumeration in the database, with attributes corresponding to the various record fields.</p>
+                <p>Our database will therefore be represented by these tables:</p>
+                <pre><code class="lang-bash">• Acte : <span class="hljs-type">id</span>, <span class="hljs-keyword">type</span>, personne_a, personne_b, date, commune, num_vue
+                • Personne : <span class="hljs-type">id</span>, nom, prenom, prenom_pere, nom_mere, prenom_mere
+                • Commune : <span class="hljs-type">id</span>, departement, nom
+                </code></pre>
+                <p>We have chosen to create two enumerations for procedure types and departments, as we have a finite set of possible values (labels for types and numbers for departments). This also offers advantages in terms of data consistency, ease of maintenance and simplified reading.</p>
+                <pre><code class="lang-bash">• Departement : <span class="hljs-type">num</span>éro
+                • <span class="hljs-keyword">Type</span> <span class="hljs-type">: </span>libelle
+                </code></pre>
+                <p>It will therefore not be necessary to have foreign key constraints between Act/Type and Municipality/Department.</p>
+                <h3 id="primary-and-foreign-key-management">Primary and Foreign Key Management</h3>
+                <p>To guarantee data integrity and consistency, we need to define primary and foreign keys. Each table will have a primary key, which will be a unique identifier. In addition, relationships between tables will be established using foreign keys on logical links between different data.</p>
+                <p>So for each table, we have an <code>id</code> attribute as primary key. </p>
+                <p>As for foreign keys :</p>
+                <pre><code class="lang-bash">Acte :
+
+                “personne_a” <span class="hljs-keyword">and</span> “personne_b” associated with the <span class="hljs-keyword">table</span> Personne
+                “commune” associated with the <span class="hljs-keyword">table</span> Commune
+                </code></pre>
+                <h3 id="relationships-between-tables">Relationships Between Tables</h3>
+                <p>In our database schema for marriage registers, we have identified and chosen to use a Many-to-One realtion.</p>
+                <p><strong>Many-to-One relationship between the <code>Acte</code> Table and the <code>Personne</code> Table</strong>.</p>
+                <p>Each act can involve two distinct people: person A and person B. To model this relationship, <code>personne_a</code> and <code>personne_b</code> serve as foreign keys, referring to the unique identifiers of the persons in the <code>Personne</code> table.</p>
+                <p>This many-to-one relationship between the <code>acte</code> and <code>persone</code> tables represents the link between registered acts and the persons in each act. A marriage deed can have two people involved (personne_a and personne_b), and each person can be linked to several deeds.</p>
+                <p><strong>Many-to-One relationship between the <code>acte</code> Table and the <code>commune</code> Table</strong> </p>
+                <p>Each marriage certificate is registered in a commune. To represent this association, the <code>commune</code> column in the <code>acte</code> table is a foreign key referring to the unique identifiers of the communes in the <code>commune</code> table.</p>
+                <p>This many-to-one relationship between the <code>acte</code> and <code>commune</code> tables links each marriage record to the commune where it was registered. An act can be registered in a single commune, but several acts can be registered in the same commune. This makes it easier to search and analyze marriage certificates according to their place of registration.</p>
+                <h2 id="database-schema">Database Schema</h2>
+                <p><img src="https://i.imgur.com/uRH4WPi.png" alt="https://i.imgur.com/uRH4WPi.png"></p>
+                <p>Note that the <code>departement</code> and <code>type</code> tables are not actually tables, but enums.</p>
+                <h2 id="relational-schema-normalization">Relational Schema Normalization</h2>
+                <h3 id="normalization-principles">Normalization Principles</h3>
+                <p>Normalization is the process of reducing data redundancy, improving integrity and minimizing anomalies in data manipulation. We have based our work on normal forms, the main ones being the first normal form (1NF), the second normal form (2NF), and the third normal form (3NF).</p>
+                <p>To apply the principles of normalization to our database, we examined the structure of each table and the functional dependencies between attributes. We ensured that each table was in 1NF by making sure that each attribute was atomic.</p>
+                <p>A relationship is 1FN if all attributes :</p>
+                <ul>
+                <li>Are atomic (not decomposable) / Non-repetitive</li>
+                <li>(Are constant over time)</li>
+                </ul>
+                <p>Next, we checked that each table was in 2NF, ensuring that every non-key attribute depended entirely on the primary key.</p>
+                <p>A 1FN relation is in 2nd normal form if :</p>
+                <ul>
+                <li>No non-key attribute depends on only part of a key <br></li>
+                <li>Only applies to tables with a compound primary key</li>
+                </ul>
+                <p>For example, in our “Acte” table, the attributes <code>type</code>, <code>personne_a</code> and <code>personne_b</code> depend directly on the act identifier. Finally, we examined the 3NF to ensure that no non-key attribute depended transitively on another non-key attribute.</p>
+                <p>A 2FN relation is in 3rd normal form if :</p>
+                <ul>
+                <li>There is no FD between non-key attributes</li>
+                </ul>
+                <p>For example, in our <code>Commune</code> table, the <code>departement</code> attribute depends directly on the commune identifier, without depending on the commune <code>nom</code>. To avoid redundancy, we have created tables for repeating values, such as commune and people, which will/can be constant or repeat. In addition, the management of departments and deed types in enumeration further avoids redundancy.</p>
+                <h2 id="table-creation">Table Creation</h2>
+                <h3 id="-departement-table"><code>Departement</code> Table</h3>
+                <pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TYPE</span> departement <span class="hljs-keyword">AS</span> <span class="hljs-keyword">ENUM</span> (<span class="hljs-string">'44'</span>, <span class="hljs-string">'49'</span>, <span class="hljs-string">'79'</span>, <span class="hljs-string">'85'</span>);
+                </code></pre>
+                <h3 id="-type-table"><code>Type</code> Table</h3>
+                <pre><code class="lang-sql"><span class="hljs-type">CREATE</span> <span class="hljs-type">TYPE</span> type_acte <span class="hljs-type">AS</span> <span class="hljs-type">ENUM</span> (<span class="hljs-symbol">'Certificat</span> de mariage', <span class="hljs-symbol">'Contrat</span> de mariage', <span class="hljs-symbol">'Divorce'</span>, <span class="hljs-symbol">'Mariage'</span>, <span class="hljs-symbol">'Promesse</span> de mariage - fiançailles', <span class="hljs-symbol">'Publication</span> de mariage', <span class="hljs-symbol">'Rectification</span> de mariage');
+                </code></pre>
+                <h3 id="-commune-table"><code>Commune</code> Table</h3>
+                <pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> commune(
+                    <span class="hljs-keyword">id</span> <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+                    nom <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+                    departement departement <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+                )
+                </code></pre>
+                <h3 id="-personne-table"><code>Personne</code> Table</h3>
+                <pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> personne (
+                    <span class="hljs-keyword">id</span> <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+                    nom <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>),
+                    prenom <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>),
+                    prenom_pere <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>),
+                    nom_mere <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>),
+                    prenom_mere <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>)
+                );
+                </code></pre>
+                <h3 id="-acte-table"><code>Acte</code> Table</h3>
+                <pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> acte(
+                    <span class="hljs-keyword">id</span> <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+                    type_id type_acte <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+                    personne_a <span class="hljs-built_in">INT</span>,
+                    personne_b <span class="hljs-built_in">INT</span>,
+                    commune <span class="hljs-built_in">INT</span>,
+                    date_ <span class="hljs-keyword">TIMESTAMP</span> <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">TIME</span> ZONE,
+                    num_vue <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'null'</span>
+                )
+                </code></pre>
+                <h2 id="data-cleaning-transformation-and-insertion-procedures">Data Cleaning, Transformation, and Insertion Procedures</h2>
+                <p>The source data, derived from CSV files, presented a number of inaccuracies (missing data, heterogeneous date formats, accented names, etc.). Pre-processing was carried out using Linux commands (cut, sort, uniq, awk) to filter and reorganize the data. Python scripts were then used to associate each person, commune or act with its unique identifier and produce consistent final files.</p>
+                <pre><code class="lang-bash"><span class="hljs-comment"># Split the file marriage_L3_5k.csv to obtain communes and persons.</span>
+                cut <span class="hljs-_">-f</span>13,14 <span class="hljs-_">-d</span> <span class="hljs-string">','</span> mariages_L3_5k.csv | sort | uniq &gt; commune.csv
+                cut <span class="hljs-_">-f</span>3,4,5,6,7 <span class="hljs-_">-d</span> <span class="hljs-string">','</span> mariages_L3_5k.csv | sort | uniq &gt; personnes.csv
+
+                <span class="hljs-comment"># Note that &gt;&gt; lets you add data to the end of the file without overwriting the previous content.</span>
+                cut <span class="hljs-_">-f</span>8,9,10,11,12 <span class="hljs-_">-d</span> <span class="hljs-string">','</span> mariages_L3_5k.csv | sort | uniq &gt;&gt; personnes.csv
+
+                <span class="hljs-comment"># Add ids for each line of the person and commune csvs.</span>
+                awk -F, <span class="hljs-string">'{print NR","$0}'</span> personne.csv &gt; personne_id.csv
+                awk -F, <span class="hljs-string">'{print NR","$0}'</span> commune.csv &gt; commune_id.csv
+                </code></pre>
+                <h3 id="record-extraction">Record Extraction</h3>
+                <p>To retrieve the acts, we used a python script that uses the files <code>marriages_L3_5k.csv</code>, <code>personne_id.csv</code> and <code>commune_id.csv</code> to generate a <code>actes.csv</code> file containing the marriage acts.</p>
+                <pre><code class="lang-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+                <span class="hljs-comment"># Loading the people.csv file into a DataFrame</span>
+                personnes_df = pd.read_csv(<span class="hljs-string">'/media/Qi/agillier/L3/Projet-Modélisation/data/personne_id.csv'</span>, header=<span class="hljs-keyword">None</span>, names=[<span class="hljs-string">'id'</span>, <span class="hljs-string">'nom'</span>, <span class="hljs-string">'prenom'</span>, <span class="hljs-string">'prenom_pere'</span>, <span class="hljs-string">'nom_mere'</span>, <span class="hljs-string">'prenom_mere'</span>], keep_default_na=<span class="hljs-keyword">False</span>)
+                commune_df = pd.read_csv(<span class="hljs-string">'/media/Qi/agillier/L3/Projet-Modélisation/data/commune_id.csv'</span>, header=<span class="hljs-keyword">None</span>, names=[<span class="hljs-string">'id'</span>, <span class="hljs-string">'nom'</span>, <span class="hljs-string">'departement'</span>], keep_default_na=<span class="hljs-keyword">False</span>)
+
+                <span class="hljs-comment"># Function to search for the number in personnes.csv</span>
+                <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trouver_id_personne</span><span class="hljs-params">(nom, prenom, prenom_pere, nom_mere, prenom_mere)</span>:</span>
+                    filtre = (personnes_df[<span class="hljs-string">'nom'</span>] == nom) &amp; (personnes_df[<span class="hljs-string">'prenom'</span>] == prenom) &amp; (personnes_df[<span class="hljs-string">'prenom_pere'</span>] == prenom_pere) &amp; (personnes_df[<span class="hljs-string">'nom_mere'</span>] == nom_mere) &amp; (personnes_df[<span class="hljs-string">'prenom_mere'</span>] == prenom_mere)
+                    resultats = personnes_df[filtre]
+                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> resultats.empty:
+                        <span class="hljs-keyword">return</span> resultats[<span class="hljs-string">'id'</span>].values[<span class="hljs-number">0</span>]
+                    <span class="hljs-keyword">else</span>:
+                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
+
+                <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trouver_id_commune</span><span class="hljs-params">(nom, departement)</span>:</span>
+                    filtre = (commune_df[<span class="hljs-string">'nom'</span>] == nom) &amp; (commune_df[<span class="hljs-string">'departement'</span>].astype(str) == str(departement))
+                    resultats = commune_df[filtre]
+                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> resultats.empty:
+                        <span class="hljs-keyword">return</span> resultats[<span class="hljs-string">'id'</span>].values[<span class="hljs-number">0</span>]
+                    <span class="hljs-keyword">else</span>:
+                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
+
+
+                <span class="hljs-comment"># Open a CSV output file to write results</span>
+                <span class="hljs-keyword">with</span> open(<span class="hljs-string">'/media/Qi/agillier/L3/Projet-Modélisation/data/mariages_L3_5k.csv'</span>, <span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> f:
+                    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'/media/Qi/agillier/L3/Projet-Modélisation/data/actes.csv'</span>, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> output_file:
+                        output_file.write(<span class="hljs-string">"Identifiant d’acte,Type d’acte,Id Personne A,Id Personne B,Commune,Date,Num Vue\n"</span>)
+                        <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f:
+                            mariage_info = line.strip().split(<span class="hljs-string">','</span>)
+                            <span class="hljs-keyword">if</span> len(mariage_info) == <span class="hljs-number">16</span>:  <span class="hljs-comment"># Make sure the line contains enough fields</span>
+                                nom_personne_a = mariage_info[<span class="hljs-number">2</span>]
+                                prenom_personne_a = mariage_info[<span class="hljs-number">3</span>]
+                                prenom_pere_personne_a = mariage_info[<span class="hljs-number">4</span>]
+                                nom_mere_personne_a = mariage_info[<span class="hljs-number">5</span>]
+                                prenom_mere_personne_a = mariage_info[<span class="hljs-number">6</span>]
+                                id_personne_a = trouver_id_personne(nom_personne_a, prenom_personne_a, prenom_pere_personne_a, nom_mere_personne_a, prenom_mere_personne_a)
+                                nom_personne_b = mariage_info[<span class="hljs-number">7</span>]
+                                prenom_personne_b = mariage_info[<span class="hljs-number">8</span>]
+                                prenom_pere_personne_b = mariage_info[<span class="hljs-number">9</span>]
+                                nom_mere_personne_b = mariage_info[<span class="hljs-number">10</span>]
+                                prenom_mere_personne_b = mariage_info[<span class="hljs-number">11</span>]
+                                id_personne_b = trouver_id_personne(nom_personne_b, prenom_personne_b, prenom_pere_personne_b, nom_mere_personne_b, prenom_mere_personne_b)
+                                commune = trouver_id_commune(mariage_info[<span class="hljs-number">12</span>], mariage_info[<span class="hljs-number">13</span>])
+                                temps = mariage_info[<span class="hljs-number">14</span>].split(<span class="hljs-string">'/'</span>)
+                                <span class="hljs-keyword">if</span> len(temps) == <span class="hljs-number">3</span>:
+                                    mariage_info[<span class="hljs-number">14</span>] = temps[<span class="hljs-number">2</span>] + <span class="hljs-string">'-'</span> + temps[<span class="hljs-number">1</span>] + <span class="hljs-string">'-'</span> + temps[<span class="hljs-number">0</span>]
+                                <span class="hljs-keyword">else</span>:
+                                    mariage_info[<span class="hljs-number">14</span>] = <span class="hljs-string">''</span>
+                                <span class="hljs-keyword">if</span> (id_personne_a <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span> <span class="hljs-keyword">and</span> id_personne_b <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>):
+                                    output_file.write(f<span class="hljs-string">"{mariage_info[0]},{mariage_info[1]},{id_personne_a},{id_personne_b},{commune},{mariage_info[14]},{mariage_info[15]}\n"</span>)
+                </code></pre>
+                <p>Inserting data into the database :</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">COPY</span> personne <span class="hljs-keyword">FROM</span> <span class="hljs-string">'C:\Program Files\PostgreSQL\16\mariages\personne_id.csv'</span> DELIMITER <span class="hljs-string">','</span> CSV;
+
+                <span class="hljs-comment">/* Note that the CSV HEADER is used to eliminate the csv header. */</span>
+                <span class="hljs-keyword">COPY</span> acte (id,type_id,personne_a,personne_b,commune,date_,num_vue) <span class="hljs-keyword">FROM</span> <span class="hljs-string">'C:\Program Files\PostgreSQL\16\mariages\actes.csv'</span> DELIMITER <span class="hljs-string">','</span> CSV HEADER;
+
+                <span class="hljs-keyword">COPY</span> commune (id,nom,departement) <span class="hljs-keyword">FROM</span> <span class="hljs-string">'C:\Program Files\PostgreSQL\16\mariages\commune_id.csv'</span> DELIMITER <span class="hljs-string">','</span> CSV;
+                </code></pre>
+                <h3 id="adding-relationships">Adding Relationships</h3>
+                <h4 id="acte-commune">Acte -&gt; Commune</h4>
+                <pre><code class="lang-sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> acte <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> acte_fk3 FOREIGN <span class="hljs-keyword">KEY</span> (commune) <span class="hljs-keyword">REFERENCES</span> commune(<span class="hljs-keyword">id</span>);
+                </code></pre>
+                <h4 id="acte-personne-a-b-">Acte -&gt; Personne (a) &amp; (b)</h4>
+                <pre><code class="lang-sql"><span class="hljs-comment">/* Acte -&gt; Personne (a) */</span>
+                <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> acte <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> acte_fk1 FOREIGN <span class="hljs-keyword">KEY</span> (personne_a) <span class="hljs-keyword">REFERENCES</span> personne(<span class="hljs-keyword">id</span>);
+                <span class="hljs-comment">/* Acte -&gt; Personne (b) */</span>
+                <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> acte <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> acte_fk2 FOREIGN <span class="hljs-keyword">KEY</span> (personne_b) <span class="hljs-keyword">REFERENCES</span> personne(<span class="hljs-keyword">id</span>);
+                </code></pre>
+                <h2 id="results-and-analysis-queries">Results and Analysis Queries</h2>
+                <p>Several queries were run to answer the questions posed:</p>
+                <p><strong>The number of communes per department</strong>: a simple GROUP BY on the communes table yields the number of distinct communes per department.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> departement, <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nombre_de_communes
+                <span class="hljs-keyword">FROM</span> commune
+                <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> departement;
+                </code></pre>
+                <p>Result : <br>
+                <img src="https://i.imgur.com/DQoVwIS.png" alt="https://i.imgur.com/TQwhhrO.png"></p>
+                <p><strong>The number of acts in LUÇON</strong> : A join between <code>acte</code> and <code>commune</code> followed by a filtering on the name allows to count the number of acts in this locality.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nombre_d_actes
+                <span class="hljs-keyword">FROM</span> acte
+                <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> commune <span class="hljs-keyword">ON</span> acte.commune = commune.id
+                <span class="hljs-keyword">WHERE</span> commune.nom = <span class="hljs-string">'LUÇON'</span>;
+                </code></pre>
+                <p>Result : <code>105</code></p>
+                <p><strong>The number of “marriage contracts” before 1855</strong>: Filtering by type of act and date, we obtain the exact number of contracts prior to this date.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nombre_de_contrats_de_mariage
+                <span class="hljs-keyword">FROM</span> acte
+                <span class="hljs-keyword">WHERE</span> type_id = <span class="hljs-string">'Contrat de mariage'</span> <span class="hljs-keyword">AND</span> date_ &lt; <span class="hljs-string">'1855-01-01'</span>;
+                </code></pre>
+                <p>Result : <code>196</code></p>
+                <p><strong>The commune with the highest number of “marriage publications ‘</strong>: A GROUP BY on <code>Publication de mariage</code> type records and a descending sort provide the commune most concerned.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> commune.nom <span class="hljs-keyword">AS</span> commune,
+                    <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nombre_de_publications_de_mariage
+                <span class="hljs-keyword">FROM</span> acte
+                <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> commune <span class="hljs-keyword">ON</span> acte.commune = commune.id
+                <span class="hljs-keyword">WHERE</span> acte.type_id = <span class="hljs-string">'Publication de mariage'</span>
+                <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> commune.nom
+                <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">DESC</span>
+                <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">1</span>;
+                </code></pre>
+                <p>Result : <code>SAINT PIERRE DU CHEMIN : 20</code></p>
+                <p><strong>The date of the first act and the last act</strong>: A simple MIN and MAX in the date_ column reveals the chronological range covered.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MIN</span>(date_) <span class="hljs-keyword">AS</span> premiere_date_acte, 
+                    <span class="hljs-keyword">MAX</span>(date_) <span class="hljs-keyword">AS</span> derniere_date_acte
+                <span class="hljs-keyword">FROM</span> acte;
+                </code></pre>
+                <p>Result : <code>First date : &quot;1581-12-23 00:00:00+00:09:21&quot;</code> &amp; <code>Last date : &quot;1915-09-14 00:00:00+00&quot;</code></p>
+                <p>The results show good consistency. The queries returned the expected quantities, despite the exclusion of some missing data. This illustrates the trade-off between completeness and data quality.</p>
+                <h2 id="challenges-and-limitations">Challenges and Limitations</h2>
+                <p>The main difficulty lay in the variable quality of the source data. Some entries were incomplete, others did not conform to the expected format. The choices made (exclusion of incomplete records, use of ENUM to restrict possible values) strengthened overall consistency, but at the cost of reducing the exploitable volume.<br>
+                In terms of performance, the manageable volume for the test phase (5k lines) was relatively modest. Moving up to a set of 500k lines will raise additional challenges in terms of memory management, loading time and robustness of the cleaning process.</p>
+                <h2 id="future-improvements">Future Improvements</h2>
+                <p>To efficiently process a large file (500k lines), a more advanced methodology would be required, involving :</p>
+                <ul>
+                <li>A more industrial cleaning strategy (robust scripts, automated quality checks, use of batch processing).</li>
+                <li>Additional indexes on key tables to speed up queries.</li>
+                <li>More powerful parsing tools (e.g. use of Python pandas, stream management, etc.) and batch processing to limit the impact on resources.</li>
+                <li>More refined management of missing values, possibly via imputation techniques or more elaborate integration of metadata.</li>
+                </ul>
+                <p>These improvements will help maintain data performance, consistency and relevance on a larger scale.</p>
+                <h2 id="conclusion">Conclusion</h2>
+                <p>This project confirmed our understanding of the principles of modeling, standardization and data management in a realistic context, where data quality and consistency were not always guaranteed. <br>
+                The whole process - from conceptualization to setting up the relational database, from cleansing to insertion, then exploration via targeted queries - demonstrated the relevance of good database management practices.<br>.
+                What&#39;s more, this work has strengthened our technical skills in SQL, data manipulation and reflection on data quality, foreshadowing a scaling-up to larger volumes. <br>
+                My sincere thanks go to the professors at the University of La Rochelle, Carlos-Emiliano González-Gallardo and Marwa Hamdi, for their guidance, as well as for the opportunity to concretely apply the knowledge acquired.<br>.
+                Finally, I&#39;d like to thank Florian Chacun, with whom we worked in pairs on this project.</p>
+                <h2 id="authors">Authors</h2>
+                <ul>
+                <li>Arthur Gillier</li>
+                <li>Florian Chacun</li>
+                <li>ChatGPT editorial support</li>
+                <li>Subjet : Université de La Rochelle.</li>
+                </ul>
+
+
+            </div>
+
+            <div class="french-report markdown-body" style="display: none;">
+                <h1 id="projet-de-mod-lisation-de-bases-de-donn-es">Projet de modélisation de bases de données</h1>
+                <p><strong>Arthur Gillier - Florian Chacun</strong></p>
+                <h2 id="r-sum-">Résumé</h2>
+                <p>Ce rapport présente un travail de modélisation, de nettoyage et d’analyse d’un ensemble de données historiques extraites d’archives départementales de mariages. L’objectif est de démontrer la maîtrise des principes de modélisation relationnelle, de normalisation et de gestion d’une base de données relationnelle sous PostgreSQL. Après avoir conceptualisé le schéma, nettoyé les données sources et inséré ces dernières dans les tables définies, diverses requêtes ont été exécutées afin de répondre à des questions spécifiques (quantités d’actes, de communes, période temporelle, etc.). Les résultats montrent la validité de la démarche, malgré les données parfois incomplètes ou bruitées. Enfin, ce travail discute des difficultés rencontrées, ainsi que des perspectives d’amélioration, notamment pour le traitement d’un fichier plus volumineux (500k lignes).</p>
+                <ul>
+                <li><a href="#projet-de-modélisation-de-bases-de-données">Projet de modélisation de bases de données</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#cadre-méthodologique-et-théorique">Cadre méthodologique et théorique</a></li>
+                <li><a href="#conceptualisation-et-modélisation-des-bases-de-données">Conceptualisation et modélisation des bases de données</a><ul>
+                <li><a href="#description-des-données">Description des données</a></li>
+                <li><a href="#définition-des-tables-et-des-attributs">Définition des tables et des attributs</a></li>
+                <li><a href="#gestion-des-clés-primaires-et-étrangères">Gestion des clés primaires et étrangères</a></li>
+                <li><a href="#relation-entre-les-tables">Relation entre les tables</a></li>
+                </ul>
+                </li>
+                <li><a href="#schéma-de-la-base-de-données">Schéma de la base de données</a></li>
+                <li><a href="#normalisation-du-schéma-rationnel">Normalisation du schéma rationnel</a><ul>
+                <li><a href="#principes-de-la-normalisation">Principes de la normalisation</a></li>
+                </ul>
+                </li>
+                <li><a href="#création-des-tables">Création des tables</a><ul>
+                <li><a href="#table-département">Table département</a></li>
+                <li><a href="#table-type">Table type d&#39;acte</a></li>
+                <li><a href="#table-commune">Table commune</a></li>
+                <li><a href="#table-personne">Table personne</a></li>
+                <li><a href="#table-acte">Table acte</a></li>
+                </ul>
+                </li>
+                <li><a href="#procédures-de-nettoyage-transformation-et-insertion-des-données">Procédures de Nettoyage, Transformation et Insertion des Données</a><ul>
+                <li><a href="#récupération-des-actes">Récupération des actes</a></li>
+                <li><a href="#ajout-des-relations">Ajout des realtions</a><ul>
+                <li><a href="#acte---commune">Acte -&gt; Commune</a></li>
+                <li><a href="#acte---personne-a--b">Acte -&gt; Personne (a) &amp; (b)</a></li>
+                </ul>
+                </li>
+                </ul>
+                </li>
+                <li><a href="#résultats-et-requêtes-danalyse">Résultats et requêtes d&#39;analyses</a></li>
+                <li><a href="#difficultés-rencontrées-et-limitations">Difficultés rencontrées et limitations</a></li>
+                <li><a href="#perspectives-et-améliorations-possibles">Perspectives et améliorations possibles</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#auteurs">Auteurs</a></li>
+                </ul>
+                <h2 id="introduction">Introduction</h2>
+                <p>L’objectif de ce projet, mené dans le cadre du cours de Modélisation de Bases de Données à l’Université de La Rochelle, est de mettre en pratique les compétences acquises en matière de conception, de normalisation et de manipulation de bases de données relationnelles. Il s’agissait de partir d’un jeu de données historiques de mariages, possédant des attributs hétérogènes et parfois imparfaits, afin de créer une base de données relationnelle exploitable.
+                Ce projet permet de consolider les acquis en SQL, de renforcer la compréhension de la normalisation et d’appréhender la gestion de données réelles, souvent imparfaites. Le résultat attendu est un système permettant aux utilisateurs (généalogistes, démographes) de consulter et d’analyser efficacement les données de mariage.</p>
+                <h2 id="cadre-m-thodologique-et-th-orique">Cadre méthodologique et théorique</h2>
+                <p>Le projet s’appuie sur les fondements de la modélisation relationnelle et sur les bonnes pratiques établies dans la communauté des SGBD. Les données ont été structurées conformément aux principes des trois premières formes normales (1NF, 2NF, 3NF) afin de réduire la redondance, d’améliorer la cohérence et de faciliter les mises à jour.
+                La normalisation garantit notamment que chaque relation ne contient que des attributs atomiques, que les dépendances partielles soient éliminées, et qu’aucune dépendance transitive entre attributs non-clés n’existe. De plus, en respectant les propriétés ACID (Atomicité, Cohérence, Isolation, Durabilité) et en suivant les standards de modélisation relationnelle, le système gagne en robustesse, maintenabilité et évolutivité.</p>
+                <h2 id="conceptualisation-et-mod-lisation-des-bases-de-donn-es">Conceptualisation et modélisation des bases de données</h2>
+                <p>La première étape de ce projet consiste à comprendre les données fournies et les modéliser de manière à répondre au besoin initial.</p>
+                <h3 id="description-des-donn-es">Description des données</h3>
+                <p>Les données sont extraites des archives départementales de Vendée et comprennent des informations détaillées sur les mariages enregistrés. Chaque enregistrement contenu dans le fichier mariages_L3_5k.csv comprend les colonnes suivantes :</p>
+                <pre><code class="lang-bash"><span class="hljs-bullet">1. </span>Identifiant d’acte 
+                <span class="hljs-bullet">2. </span>Type d’acte
+                <span class="hljs-bullet">3. </span>Nom personne A
+                <span class="hljs-bullet">4. </span>Prénom personne A
+                <span class="hljs-bullet">5. </span>Prénom père personne A 
+                <span class="hljs-bullet">6. </span>Nom mère personne A
+                <span class="hljs-bullet">7. </span>Prénom mère personne A 
+                <span class="hljs-bullet">8. </span>Nom personne B
+                <span class="hljs-bullet">9. </span>Prénom personne B
+                <span class="hljs-bullet">10. </span>Prénom père personne B 
+                <span class="hljs-bullet">11. </span>Nom mère personne B 
+                <span class="hljs-bullet">12. </span>Prénom mère personne B 
+                <span class="hljs-bullet">13. </span>Commune
+                <span class="hljs-bullet">14. </span>Département 
+                <span class="hljs-bullet">15. </span>Date
+                <span class="hljs-bullet">16. </span>Num Vue
+                </code></pre>
+                <h3 id="d-finition-des-tables-et-des-attributs">Définition des tables et des attributs</h3>
+                <p>Sur la base de la description des données, nous avons identifié plusieurs entités : les actes, les personnes, les types d&#39;actes, les communes et les départements. Chaque entité sera représentée par une table ou une énumération dans la base de données, avec des attributs correspondant aux différents champs des enregistrements.</p>
+                <p>Notre base de données sera donc représenté par ces tables :</p>
+                <pre><code class="lang-bash">• Acte : <span class="hljs-type">id</span>, <span class="hljs-keyword">type</span>, personne_a, personne_b, date, commune, num_vue
+                • Personne : <span class="hljs-type">id</span>, nom, prenom, prenom_pere, nom_mere, prenom_mere
+                • Commune : <span class="hljs-type">id</span>, departement, nom
+                </code></pre>
+                <p>Nous avons choisi de créer deux énumérations pour les types d&#39;actes et les départements car nous avons un ensembles fini de valeurs possibles (les libéllés pour les types et les numéros pour les départements). De plus cela offre des avantages en termes de cohérence des données, de facilité de maintenance et de lecture simplifiée.</p>
+                <pre><code class="lang-bash">• Departement : <span class="hljs-type">num</span>éro
+                • <span class="hljs-keyword">Type</span> <span class="hljs-type">: </span>libelle
+                </code></pre>
+                <p>Il ne sera donc pas nécessaire d&#39;avoir des contraintes de clés étrangères entre Acte/Type et Commune/Departement</p>
+                <h3 id="gestion-des-cl-s-primaires-et-trang-res">Gestion des clés primaires et étrangères</h3>
+                <p>Pour garantir l&#39;intégrité et la cohérence des données, il faut définir les clés primaires et étrangères. Chaque table aura une clé primaire qui sera un identifiant unique. De plus, les relations entre les tables seront établies à l&#39;aide de clés étrangères sur des liens logiques entre les différentes données.</p>
+                <p>Nous avons donc pour chaque table, un attribut <code>id</code> comme clé primaire. </p>
+                <p>Pour ce qui est des clés étrangères :</p>
+                <pre><code class="lang-bash">Acte :
+
+                “personne_a” et “personne_b” associées à la <span class="hljs-keyword">table</span> Personne
+                “commune” associée à la <span class="hljs-keyword">table</span> Commune
+                </code></pre>
+                <h3 id="relation-entre-les-tables">Relation entre les tables</h3>
+                <p>Dans notre schéma de base de données pour les registres de mariages, nous avons identifié et choisit d&#39;utiliser une realtion Many-to-One.</p>
+                <p><strong>Relation Many-to-One entre la Table <code>acte</code> et la Table <code>personne</code></strong></p>
+                <p>Chaque acte peut impliquer deux personnes distinctes : la personne A et la personne B. Pour modéliser cette relation, <code>personne_a</code> et <code>personne_b</code> servent de clés étrangères faisant référence aux identifiants uniques des personnes dans la table <code>personne</code>.</p>
+                <p>Cette relation many-to-one entre les tables <code>acte</code> et <code>personne</code> permet de représenter le lien entre les actes enregistrés et les personnes dans chaque acte. Un acte de mariage peut avoir deux personnes impliquées (personne_a et personne_b), et chaque personne peut être liée à plusieurs actes.</p>
+                <p><strong>Relation Many-to-One entre la Table <code>acte</code> et la Table <code>commune</code></strong> </p>
+                <p>Chaque acte de mariage est enregistré dans une commune. Pour représenter cette association, la colonne <code>commune</code> dans la table <code>acte</code> est une clé étrangère faisant référence aux identifiants uniques des communes dans la table <code>commune</code>.</p>
+                <p>Cette relation many-to-one entre les tables <code>acte</code> et <code>commune</code> permet de lier chaque acte de mariage à la commune où il a été enregistré. Un acte peut être enregistré dans une seule commune, mais plusieurs actes peuvent être enregistrés dans la même commune. Cela facilite la recherche et l&#39;analyse des actes de mariage selon leur lieu d&#39;enregistrement.</p>
+                <h2 id="sch-ma-de-la-base-de-donn-es">Schéma de la base de données</h2>
+                <p><img src="https://i.imgur.com/uRH4WPi.png" alt="https://i.imgur.com/uRH4WPi.png"></p>
+                <p>Notez que les tables <code>departement</code>et <code>type</code> ne sont pas réellement des tables mais des enums.</p>
+                <h2 id="normalisation-du-sch-ma-rationnel">Normalisation du schéma rationnel</h2>
+                <h3 id="principes-de-la-normalisation">Principes de la normalisation</h3>
+                <p>La normalisation est le processus qui vise à réduire la redondance des données, à améliorer l&#39;intégrité et à minimiser les anomalies lors de la manipulation des données. Nous nous sommes basés sur les formes normales, dont les principales sont la première forme normale (1NF), la deuxième forme normale (2NF), et la troisième forme normale (3NF).</p>
+                <p>Pour appliquer les principes de la normalisation à notre base de données, nous avons examiné la structure de chaque table et les dépendances fonctionnelles entre les attributs. Nous avons fait en sorte que chaque table soit en 1NF en nous assurant que chaque attribut est atomique.</p>
+                <p>Une relation est en 1FN si tous les attributs :</p>
+                <p>• Sont atomiques (pas décomposables) / non répétitifs
+                • (Sont constants dans le temps)</p>
+                <p>Ensuite, nous avons vérifié que chaque table était en 2NF en s&#39;assurant que chaque attribut non-clé dépendait entièrement de la clé primaire. </p>
+                <p>Une relation 1FN est en 2e forme normale si :</p>
+                <p>• Aucun attribut non-clé ne dépend que d’une partie d’une clé <br>
+                • Elle ne concerne que les tables à clé primaire composée</p>
+                <p>Par exemple, dans notre table &quot;Acte&quot;, les attributs &quot;type&quot;, &quot;personne_a&quot; et &quot;personne_b&quot; dépendent directement de l&#39;identifiant de l&#39;acte. Enfin, nous avons examiné la 3NF pour nous assurer qu&#39;aucun attribut non-clé ne dépendait transitivement d&#39;un autre attribut non-clé.</p>
+                <p>Une relation 2FN est en 3e forme normale si :</p>
+                <p>• Il n’existe aucune DF entre les attributs non-clés</p>
+                <p>Par exemple, dans notre table &quot;Commune&quot;, l&#39;attribut &quot;departement&quot; dépend directement de l&#39;identifiant de la commune, sans dépendre du “nom” de la commune. Afin d’éviter la redondance, nous avons créé des tables pour des valeurs qui se répétaient comme par exemple la commune et les personnes qui seront/peuvent être constants ou se répéter. De plus, la gestion des départements et des types d&#39;actes en énumération évite encore plus la redondance.</p>
+                <h2 id="cr-ation-des-tables">Création des tables</h2>
+                <h3 id="table-d-partement-">Table <code>Département</code></h3>
+                <pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TYPE</span> departement <span class="hljs-keyword">AS</span> <span class="hljs-keyword">ENUM</span> (<span class="hljs-string">'44'</span>, <span class="hljs-string">'49'</span>, <span class="hljs-string">'79'</span>, <span class="hljs-string">'85'</span>);
+                </code></pre>
+                <h3 id="table-type-">Table <code>Type</code></h3>
+                <pre><code class="lang-sql"><span class="hljs-type">CREATE</span> <span class="hljs-type">TYPE</span> type_acte <span class="hljs-type">AS</span> <span class="hljs-type">ENUM</span> (<span class="hljs-symbol">'Certificat</span> de mariage', <span class="hljs-symbol">'Contrat</span> de mariage', <span class="hljs-symbol">'Divorce'</span>, <span class="hljs-symbol">'Mariage'</span>, <span class="hljs-symbol">'Promesse</span> de mariage - fiançailles', <span class="hljs-symbol">'Publication</span> de mariage', <span class="hljs-symbol">'Rectification</span> de mariage');
+                </code></pre>
+                <h3 id="table-commune-">Table <code>Commune</code></h3>
+                <pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> commune(
+                    <span class="hljs-keyword">id</span> <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+                    nom <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+                    departement departement <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+                )
+                </code></pre>
+                <h3 id="table-personne-">Table <code>Personne</code></h3>
+                <pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> personne (
+                    <span class="hljs-keyword">id</span> <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+                    nom <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>),
+                    prenom <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>),
+                    prenom_pere <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>),
+                    nom_mere <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>),
+                    prenom_mere <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>)
+                );
+                </code></pre>
+                <h3 id="table-acte-">Table <code>Acte</code></h3>
+                <pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> acte(
+                    <span class="hljs-keyword">id</span> <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+                    type_id type_acte <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+                    personne_a <span class="hljs-built_in">INT</span>,
+                    personne_b <span class="hljs-built_in">INT</span>,
+                    commune <span class="hljs-built_in">INT</span>,
+                    date_ <span class="hljs-keyword">TIMESTAMP</span> <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">TIME</span> ZONE,
+                    num_vue <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'null'</span>
+                )
+                </code></pre>
+                <h2 id="proc-dures-de-nettoyage-transformation-et-insertion-des-donn-es">Procédures de Nettoyage, Transformation et Insertion des Données</h2>
+                <p>Les données sources, issues de fichiers CSV, présentaient des imprécisions (données manquantes, formats de dates hétérogènes, noms accentués, etc.). Un pré-traitement a été effectué à l’aide de commandes Linux (cut, sort, uniq, awk) afin de filtrer et réorganiser les données. Des scripts Python ont ensuite été utilisés pour associer chaque personne, commune ou acte à son identifiant unique et produire des fichiers finaux cohérents.</p>
+                <pre><code class="lang-bash"># Découpage du fichier mariage_L3_5k.<span class="hljs-built_in">csv</span> pour obtenir les communes et les personnes.
+                <span class="hljs-built_in">cut</span> -f13,<span class="hljs-number">14</span> -d ',' mariages_L3_5k.<span class="hljs-built_in">csv</span> | sort | uniq &gt; commune.<span class="hljs-built_in">csv</span>
+                <span class="hljs-built_in">cut</span> -f3,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span> -d ',' mariages_L3_5k.<span class="hljs-built_in">csv</span> | sort | uniq &gt; personnes.<span class="hljs-built_in">csv</span>
+
+                # Notons que le &gt;&gt; permet de rajouter les données à la fin du fichier sans écraser le contenu précédent.
+                <span class="hljs-built_in">cut</span> -f8,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-number">11</span>,<span class="hljs-number">12</span> -d ',' mariages_L3_5k.<span class="hljs-built_in">csv</span> | sort | uniq &gt;&gt; personnes.<span class="hljs-built_in">csv</span>
+
+                # Ajout des id pour chaque ligne des <span class="hljs-built_in">csv</span> de personne et commune.
+                awk -F, '{print NR<span class="hljs-string">","</span>$<span class="hljs-number">0</span>}' personne.<span class="hljs-built_in">csv</span> &gt; personne_id.<span class="hljs-built_in">csv</span>
+                awk -F, '{print NR<span class="hljs-string">","</span>$<span class="hljs-number">0</span>}' commune.<span class="hljs-built_in">csv</span> &gt; commune_id.<span class="hljs-built_in">csv</span>
+                </code></pre>
+                <h3 id="r-cup-ration-des-actes">Récupération des actes</h3>
+                <p>Afin de récupérer les actes nous avons utiliser un script python qui utilise les fichiers <code>mariages_L3_5k.csv</code>, <code>personne_id.csv</code> et <code>commune_id.csv</code> pour générer un fichier <code>actes.csv</code> qui contient les actes de mariage.</p>
+                <pre><code class="lang-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+                <span class="hljs-comment"># Charger le fichier personnes.csv dans un DataFrame</span>
+                personnes_df = pd.read_csv(<span class="hljs-string">'/media/Qi/agillier/L3/Projet-Modélisation/data/personne_id.csv'</span>, header=<span class="hljs-keyword">None</span>, names=[<span class="hljs-string">'id'</span>, <span class="hljs-string">'nom'</span>, <span class="hljs-string">'prenom'</span>, <span class="hljs-string">'prenom_pere'</span>, <span class="hljs-string">'nom_mere'</span>, <span class="hljs-string">'prenom_mere'</span>], keep_default_na=<span class="hljs-keyword">False</span>)
+                commune_df = pd.read_csv(<span class="hljs-string">'/media/Qi/agillier/L3/Projet-Modélisation/data/commune_id.csv'</span>, header=<span class="hljs-keyword">None</span>, names=[<span class="hljs-string">'id'</span>, <span class="hljs-string">'nom'</span>, <span class="hljs-string">'departement'</span>], keep_default_na=<span class="hljs-keyword">False</span>)
+
+                <span class="hljs-comment"># Fonction pour rechercher le numéro dans personnes.csv</span>
+                <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trouver_id_personne</span><span class="hljs-params">(nom, prenom, prenom_pere, nom_mere, prenom_mere)</span>:</span>
+                    filtre = (personnes_df[<span class="hljs-string">'nom'</span>] == nom) &amp; (personnes_df[<span class="hljs-string">'prenom'</span>] == prenom) &amp; (personnes_df[<span class="hljs-string">'prenom_pere'</span>] == prenom_pere) &amp; (personnes_df[<span class="hljs-string">'nom_mere'</span>] == nom_mere) &amp; (personnes_df[<span class="hljs-string">'prenom_mere'</span>] == prenom_mere)
+                    resultats = personnes_df[filtre]
+                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> resultats.empty:
+                        <span class="hljs-keyword">return</span> resultats[<span class="hljs-string">'id'</span>].values[<span class="hljs-number">0</span>]
+                    <span class="hljs-keyword">else</span>:
+                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
+
+                <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trouver_id_commune</span><span class="hljs-params">(nom, departement)</span>:</span>
+                    filtre = (commune_df[<span class="hljs-string">'nom'</span>] == nom) &amp; (commune_df[<span class="hljs-string">'departement'</span>].astype(str) == str(departement))
+                    resultats = commune_df[filtre]
+                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> resultats.empty:
+                        <span class="hljs-keyword">return</span> resultats[<span class="hljs-string">'id'</span>].values[<span class="hljs-number">0</span>]
+                    <span class="hljs-keyword">else</span>:
+                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
+
+
+                <span class="hljs-comment"># Ouvrir un fichier de sortie CSV pour écrire les résultats</span>
+                <span class="hljs-keyword">with</span> open(<span class="hljs-string">'/media/Qi/agillier/L3/Projet-Modélisation/data/mariages_L3_5k.csv'</span>, <span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> f:
+                    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'/media/Qi/agillier/L3/Projet-Modélisation/data/actes.csv'</span>, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> output_file:
+                        output_file.write(<span class="hljs-string">"Identifiant d’acte,Type d’acte,Id Personne A,Id Personne B,Commune,Date,Num Vue\n"</span>)
+                        <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f:
+                            mariage_info = line.strip().split(<span class="hljs-string">','</span>)
+                            <span class="hljs-keyword">if</span> len(mariage_info) == <span class="hljs-number">16</span>:  <span class="hljs-comment"># Assurez-vous que la ligne contient suffisamment de champs</span>
+                                nom_personne_a = mariage_info[<span class="hljs-number">2</span>]
+                                prenom_personne_a = mariage_info[<span class="hljs-number">3</span>]
+                                prenom_pere_personne_a = mariage_info[<span class="hljs-number">4</span>]
+                                nom_mere_personne_a = mariage_info[<span class="hljs-number">5</span>]
+                                prenom_mere_personne_a = mariage_info[<span class="hljs-number">6</span>]
+                                id_personne_a = trouver_id_personne(nom_personne_a, prenom_personne_a, prenom_pere_personne_a, nom_mere_personne_a, prenom_mere_personne_a)
+                                nom_personne_b = mariage_info[<span class="hljs-number">7</span>]
+                                prenom_personne_b = mariage_info[<span class="hljs-number">8</span>]
+                                prenom_pere_personne_b = mariage_info[<span class="hljs-number">9</span>]
+                                nom_mere_personne_b = mariage_info[<span class="hljs-number">10</span>]
+                                prenom_mere_personne_b = mariage_info[<span class="hljs-number">11</span>]
+                                id_personne_b = trouver_id_personne(nom_personne_b, prenom_personne_b, prenom_pere_personne_b, nom_mere_personne_b, prenom_mere_personne_b)
+                                commune = trouver_id_commune(mariage_info[<span class="hljs-number">12</span>], mariage_info[<span class="hljs-number">13</span>])
+                                temps = mariage_info[<span class="hljs-number">14</span>].split(<span class="hljs-string">'/'</span>)
+                                <span class="hljs-keyword">if</span> len(temps) == <span class="hljs-number">3</span>:
+                                    mariage_info[<span class="hljs-number">14</span>] = temps[<span class="hljs-number">2</span>] + <span class="hljs-string">'-'</span> + temps[<span class="hljs-number">1</span>] + <span class="hljs-string">'-'</span> + temps[<span class="hljs-number">0</span>]
+                                <span class="hljs-keyword">else</span>:
+                                    mariage_info[<span class="hljs-number">14</span>] = <span class="hljs-string">''</span>
+                                <span class="hljs-keyword">if</span> (id_personne_a <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span> <span class="hljs-keyword">and</span> id_personne_b <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>):
+                                    output_file.write(f<span class="hljs-string">"{mariage_info[0]},{mariage_info[1]},{id_personne_a},{id_personne_b},{commune},{mariage_info[14]},{mariage_info[15]}\n"</span>)
+                </code></pre>
+                <p>Insertion des données dans la base de données :</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">COPY</span><span class="bash"> personne FROM <span class="hljs-string">'C:\Program Files\PostgreSQL\16\mariages\personne_id.csv'</span> DELIMITER <span class="hljs-string">','</span> CSV;
+                </span>
+                /* Notons que l<span class="hljs-string">'on utilise le CSV HEADER afin d'</span>éliminer le header du csv. */
+                <span class="hljs-keyword">COPY</span><span class="bash"> acte (id,type_id,personne_a,personne_b,commune,date_,num_vue) FROM <span class="hljs-string">'C:\Program Files\PostgreSQL\16\mariages\actes.csv'</span> DELIMITER <span class="hljs-string">','</span> CSV HEADER;
+                </span>
+                <span class="hljs-keyword">COPY</span><span class="bash"> commune (id,nom,departement) FROM <span class="hljs-string">'C:\Program Files\PostgreSQL\16\mariages\commune_id.csv'</span> DELIMITER <span class="hljs-string">','</span> CSV;</span>
+                </code></pre>
+                <h3 id="ajout-des-relations">Ajout des relations</h3>
+                <h4 id="acte-commune">Acte -&gt; Commune</h4>
+                <pre><code class="lang-sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> acte <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> acte_fk3 FOREIGN <span class="hljs-keyword">KEY</span> (commune) <span class="hljs-keyword">REFERENCES</span> commune(<span class="hljs-keyword">id</span>);
+                </code></pre>
+                <h4 id="acte-personne-a-b-">Acte -&gt; Personne (a) &amp; (b)</h4>
+                <pre><code class="lang-sql"><span class="hljs-comment">/* Acte -&gt; Personne (a) */</span>
+                <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> acte <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> acte_fk1 FOREIGN <span class="hljs-keyword">KEY</span> (personne_a) <span class="hljs-keyword">REFERENCES</span> personne(<span class="hljs-keyword">id</span>);
+                <span class="hljs-comment">/* Acte -&gt; Personne (b) */</span>
+                <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> acte <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> acte_fk2 FOREIGN <span class="hljs-keyword">KEY</span> (personne_b) <span class="hljs-keyword">REFERENCES</span> personne(<span class="hljs-keyword">id</span>);
+                </code></pre>
+                <h2 id="r-sultats-et-requ-tes-d-analyse">Résultats et requêtes d’analyse</h2>
+                <p>Plusieurs requêtes ont été exécutées afin de répondre aux questions posées :</p>
+                <p><strong>La quantité de communes par département</strong>
+                : un simple GROUP BY sur la table des communes permet d’obtenir le nombre de communes distinctes par département.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> departement, <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nombre_de_communes
+                <span class="hljs-keyword">FROM</span> commune
+                <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> departement;
+                </code></pre>
+                <p>Résultat : <br>
+                <img src="https://i.imgur.com/DQoVwIS.png" alt="https://i.imgur.com/TQwhhrO.png"></p>
+                <p><strong>La quantité d&#39;actes à LUÇON</strong> : Une jointure entre “acte” et “commune” suivie d’un filtrage sur le nom permet de compter le nombre d’actes dans cette localité.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nombre_d_actes
+                <span class="hljs-keyword">FROM</span> acte
+                <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> commune <span class="hljs-keyword">ON</span> acte.commune = commune.id
+                <span class="hljs-keyword">WHERE</span> commune.nom = <span class="hljs-string">'LUÇON'</span>;
+                </code></pre>
+                <p>Résultat : <code>105</code></p>
+                <p><strong>La quantité de “contrats de mariage” avant 1855</strong> : En filtrant par type d’acte et date, on obtient le nombre exact de contrats antérieurs à cette date.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nombre_de_contrats_de_mariage
+                <span class="hljs-keyword">FROM</span> acte
+                <span class="hljs-keyword">WHERE</span> type_id = <span class="hljs-string">'Contrat de mariage'</span> <span class="hljs-keyword">AND</span> date_ &lt; <span class="hljs-string">'1855-01-01'</span>;
+                </code></pre>
+                <p>Résultat : <code>196</code></p>
+                <p><strong>La commune avec la plus quantité de “publications de mariage”</strong> : Un GROUP BY sur les actes de type “Publication de mariage” et un tri décroissant fournissent la commune la plus concernée.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> commune.nom <span class="hljs-keyword">AS</span> commune,
+                    <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nombre_de_publications_de_mariage
+                <span class="hljs-keyword">FROM</span> acte
+                <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> commune <span class="hljs-keyword">ON</span> acte.commune = commune.id
+                <span class="hljs-keyword">WHERE</span> acte.type_id = <span class="hljs-string">'Publication de mariage'</span>
+                <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> commune.nom
+                <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">DESC</span>
+                <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">1</span>;
+                </code></pre>
+                <p>Résultat : <code>SAINT PIERRE DU CHEMIN : 20</code></p>
+                <p><strong>La date du premier acte et le dernier acte</strong> : Un simple MIN et MAX sur la colonne date_ des actes révèle l’étendue chronologique couverte.</p>
+                <pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MIN</span>(date_) <span class="hljs-keyword">AS</span> premiere_date_acte, 
+                    <span class="hljs-keyword">MAX</span>(date_) <span class="hljs-keyword">AS</span> derniere_date_acte
+                <span class="hljs-keyword">FROM</span> acte;
+                </code></pre>
+                <p>Résultat : <code>Première date : &quot;1581-12-23 00:00:00+00:09:21&quot;</code> &amp; <code>Dernière date : &quot;1915-09-14 00:00:00+00&quot;</code></p>
+                <p>Les résultats montrent une bonne cohérence. Les requêtes renvoient les quantités attendues, malgré l’exclusion de certaines données manquantes. Ce constat illustre le compromis entre exhaustivité et qualité des données.</p>
+                <h2 id="difficult-s-rencontr-es-et-limitations">Difficultés rencontrées et limitations</h2>
+                <p>La principale difficulté a résidé dans la qualité variable des données sources. Certaines entrées étaient partielles, d’autres non conformes au format attendu. Les choix effectués (exclusion des enregistrements incomplets, utilisation d’ENUM pour restreindre les valeurs possibles) ont renforcé la cohérence globale, mais au prix d’une réduction du volume exploitable. <br>
+                En termes de performance, le volume gérable pour la phase test (5k lignes) était relativement modeste. Le passage à un ensemble de 500k lignes soulèvera des défis supplémentaires en termes de gestion de la mémoire, de temps de chargement et de robustesse du processus de nettoyage.</p>
+                <h2 id="perspectives-et-am-liorations-possibles">Perspectives et améliorations possibles</h2>
+                <p>Pour traiter efficacement un fichier de grande envergure (500k lignes), une méthodologie plus avancée serait nécessaire, impliquant :</p>
+                <ul>
+                <li>Une stratégie de nettoyage plus industrielle (scripts robustes, automatisation des contrôles de qualité, utilisation de batch processing).</li>
+                <li>Des index supplémentaires sur les tables clés pour accélérer les requêtes.</li>
+                <li>Des outils plus puissants pour le parsing (p. ex. utilisation de pandas en Python, gestion en flux, etc.) et des traitements par lot pour limiter l’impact sur les ressources.</li>
+                <li>Une gestion plus fine des valeurs manquantes, éventuellement via des techniques d’imputation ou une intégration plus élaborée de métadonnées.</li>
+                </ul>
+                <p>Ces améliorations permettraient de maintenir les performances, la cohérence et la pertinence des données à plus grande échelle.</p>
+                <h2 id="conclusion">Conclusion</h2>
+                <p>Ce projet a permis de confirmer la bonne compréhension des principes de modélisation, de normalisation et de gestion des données dans un contexte réaliste, où la qualité et la cohérence des données n’étaient pas toujours garanties. <br>
+                L’ensemble du processus – de la conceptualisation à la mise en place de la base relationnelle, du nettoyage à l’insertion, puis de l’exploration via des requêtes ciblées – a démontré la pertinence des bonnes pratiques de gestion de bases de données.<br>
+                En outre, ce travail a renforcé nos compétences techniques en SQL, en manipulation de données et en réflexion sur la qualité des données, préfigurant une montée en échelle vers des volumes plus importants. <br>
+                Je remercie sincèrement les professeurs de l’Université de La Rochelle, Carlos-Emiliano González-Gallardo et Marwa Hamdi, pour leur encadrement, ainsi que pour l’opportunité d’appliquer concrètement les connaissances acquises.<br>
+                Pour finir je tiens à remercier Florian Chacun avec qui nous avons travaillés en binôme sur ce projet.</p>
+                <h2 id="auteurs">Auteurs</h2>
+                <ul>
+                <li>Arthur Gillier</li>
+                <li>Florian Chacun</li>
+                <li>Aide à la rédaction par ChatGPT</li>
+                <li>Sujet : Université de La Rochelle.</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <section class="related-cases">
+            <h2 class="animated-section-left">Take a look at the next cases</h3>
+            <div class="cases-list">
+              <a href="/pages/study-cases/companion-virus.html">
+                <img src="/images/cases-img/virus.png">
+                <div>
+                  <h3>Companion virus</h3>
+                  <p>Design and implementation of a functional companion virus, with credible utilities, in order to experiment with the propagation, infection and concealment mechanisms specific to computer viruses in an educational security context.</p>
+                </div>
+              </a>
+              <a href="/pages/study-cases/smartphone-application.html">
+                <img src="/images/cases-img/smartphoneApp.png">
+                <div>
+                  <h3>Smartphone development project</h3>
+                  <p>Developing an 8 checkers application for smartphones, including help functions, customization (background, colors, pieces), and a polished interface to offer an immersive, modular user experience.</p>
+                </div>
+              </a>
+            </div>
+          </section>
+
+      </main>
+
+      <footer>
+        <a href="/index.html">Homepage</a>
+        <a href="/index.html#about">About</a>
+        <a href="/index.html#contact">Contact</a>
+        <a href="/pages/study-cases.html">Study cases</a>
+      </footer>
+    </div>
+  </body>
+  <script src="/src/main.js"></script>
+</html>

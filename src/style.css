@@ -12,28 +12,19 @@
     transition: background-color 0.5s ease;
 }
 
-h1{
-    font-size: 36px;
-}
-
-h2{
-    font-size: 32px;
-}
-
-h3{
-    font-size: 24px;
-}
+h1{font-size: 36px;}
+h2{font-size: 32px;}
+h3{font-size: 24px;}
+.project-card-right-top>h2>a{text-decoration: none;}
 
 a{color: var(--white);text-decoration: underline;}
 a:visited{color: var(--white);}
 a:hover{color: var(--white);}
 
-
-
 /**Header**/
 
 header{
-    height: 100vh;
+    height: 90vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -55,6 +46,16 @@ header>h3{
     display: inline;
 }
 
+header>a{
+    width: 100px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+#typewriter-container>span{
+    font-size: 36px;
+}
+
 #name{
     cursor: pointer;
     border: none;
@@ -69,6 +70,9 @@ header>h3{
 
 
 /**Main**/
+#selected-cases{
+    padding-top: 30px;
+}
 
 .project-card{
     margin: 80px 0;
@@ -103,7 +107,8 @@ header>h3{
 #about{
     height: 100vh;
     width: 100%;
-    margin-top: 200px;
+    margin-top: 170px;
+    padding-top: 30px;
 }
 
 .about-top, .about-bottom{
@@ -121,7 +126,8 @@ header>h3{
 #contact{
     height: 50vh;
     width: 100%;
-    margin-top: 200px;
+    margin-top: 170px;
+    padding-top: 30px;
     display: flex;
     justify-content: space-between;
 }
@@ -168,6 +174,10 @@ footer>*{
     text-decoration: underline;
 }
 
+.study-case{
+    padding-top: 20px;
+}
+
 .study-case>.study-case-title{
     display: flex;
     justify-content: flex-start;
@@ -185,5 +195,247 @@ footer>*{
 }
 
 .study-case>section>h3, .study-case>section>img, .study-case>section>video{
-    width: 600px;
+    width: 700px;
+}
+
+.language-btn{
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 24px;
+    margin: 20px 0;
+    padding: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.markdown-body {
+    margin-top: 80px;
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 100%;
+    padding: 45px;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; 
+}
+
+.markdown-body.visible{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+    .markdown-body {
+        padding: 15px;
+    }
+}
+
+.link{
+    margin-right: 20px;
+}
+
+.animated-section-bottom {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animated-section-top {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animated-section-bottom.visible, .animated-section-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animated-section-left{
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animated-section-right{
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animated-section-left.visible, .animated-section-right.visible, .bigImg{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.bigImg {
+    transform: scale(0.9) translateY(50px);
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; 
+}
+
+.bigImg.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated-section-bottom li {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+.animated-section-bottom li:nth-child(1) {animation-delay: 0s;}
+.animated-section-bottom li:nth-child(2) {animation-delay: 0.2s;}
+.animated-section-bottom li:nth-child(3) {animation-delay: 0.4s;}
+
+footer a{
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+footer a:nth-child(1) {animation-delay: 0s;}
+footer a:nth-child(2) {animation-delay: 0.2s;}
+footer a:nth-child(3) {animation-delay: 0.4s;}
+footer a:nth-child(4) {animation-delay: 0.6s;}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#work-filter li {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideFromLeft 0.5s ease-out forwards;
+}
+
+#work-filter li:nth-child(1) {animation-delay: 0s;}
+#work-filter li:nth-child(2) {animation-delay: 0.2s;}
+#work-filter li:nth-child(3) {animation-delay: 0.4s;}
+#work-filter li:nth-child(4) {animation-delay: 0.6s;}
+
+.flair {
+    width: 200px;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1000;
+    display: inline;
+}
+
+/** Controleur de musique */
+#myProgress {
+    width: 100px;
+    background-color: #d9d9f29b; 
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#myBar {
+    width: 0%;
+    height: 5px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.btn-ctn, .infos-ctn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-ctn > div {
+    padding: 5px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.player-ctn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.player-ctn-visible{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.music-info{
+    display: flex;
+    align-items: center;
+}
+
+.player-infos{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.duration, .timer{
+    margin: 0 10px;
+}
+
+.fas{
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.related-cases{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cases-list{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.cases-list>a{
+    width: 45%;
+    display: flex;
+    text-decoration: none;
+}
+
+.cases-list>a>img{
+    height: 150px;
+    margin-right: 20px;
+}
+
+.cases-list>a>div>h3{
+    text-decoration: underline;
+    margin-bottom: 10px;
 }

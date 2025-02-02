@@ -12,25 +12,26 @@
   <body>
     <div id="app">
       <header>
-        <p>:)</p>
-        <h1>This is a showcase of my best work in various fields, including web development, web design, algorithm development, database modeling and more.</h1>
-        <h3>You are on the portfolio of : <a href="/index.html">ARTHUR_GILLIER</a></h3>
+        <p class="animated-section-top">:)</p>
+        <h1 class="animated-section-left">This is a showcase of my best work in various fields, including web development, web design, algorithm development, database modeling and more.</h1>
+        <h3 class="animated-section-left">You are on the portfolio of : <a href="/index.html">ARTHUR_GILLIER</a></h3>
       </header>
       <main>
-        <section class="selected-cases">
+        <section class="selected-cases study-case">
             <ul id="work-filter">
                 <li data-filter="all">All</li>
                 <li data-filter="web-project">Web projects</li>
                 <li data-filter="academic-work">Academic works</li>
-                <li data-filter="design">Designs</li>
             </ul>
 
           <!--La Bête-->
-          <section class="project-card web-project design">
-            <img src="/images/cases-img/labete.png">
+          <section class="project-card web-project design animated-section-bottom">
+            <a href="/pages/study-cases/la-bete.html">
+              <img src="/images/cases-img/labete.png" alt="La Bête project image">
+            </a>
             <section class="project-card-right">
               <section class="project-card-right-top">
-                <h2>"La Bête" - Web development project</h2>
+                <h2><a href="/pages/study-cases/la-bete.html">La Bête</a></h2>
                 <h3>Design and development work around the musical project “La Bête” by two French musical artists.</h3>
               </section>
               <section class="project-card-right-bottom">
@@ -44,11 +45,13 @@
           </section>
 
           <!--Argenteurs-->
-          <section class="project-card web-project design">
-            <img src="/images/cases-img/argenteurs.png" alt="Argenteurs project image">
+          <section class="project-card web-project design animated-section-bottom">
+            <a href="/pages/study-cases/argenteurs.html">
+              <img src="/images/cases-img/argenteurs.png" alt="Argenteurs project image">
+            </a>
             <section class="project-card-right">
               <section class="project-card-right-top">
-                <h2>"Argenteurs" - Web development project</h2>
+                <h2><a href="/pages/study-cases/argenteurs.html">Argenteurs</a></h2>
                 <h3>Webdesign around the “Argenteurs” photography collective and their events.</h3>
               </section>
               <section class="project-card-right-bottom">
@@ -62,11 +65,13 @@
           </section>
 
           <!--0-119 esone-->
-          <section class="project-card web-project design">
-            <img src="/images/cases-img/esone.png" alt="0-119 Esone project image">
+          <section class="project-card web-project design animated-section-bottom">
+            <a href="/pages/study-cases/esone.html">
+              <img src="/images/cases-img/esone.png" alt="0-119 Esone project image">
+            </a>
             <section class="project-card-right">
               <section class="project-card-right-top">
-                <h2>"0-119" - Web development project</h2>
+                <h2><a href="/pages/study-cases/esone.html">0-119</a></h2>
                 <h3>Design and development work around the musical project “0-119” by a French musical artist.</h3>
               </section>
               <section class="project-card-right-bottom">
@@ -80,11 +85,13 @@
           </section>
 
           <!--Recipe processing App-->
-          <section class="project-card academic-work">
-            <img src="/images/cases-img/recipeApp.png" alt="Recipe processing application image">
+          <section class="project-card academic-work animated-section-bottom">
+            <a href="/pages/study-cases/recipe-app.html">
+              <img src="/images/cases-img/recipeApp.png" alt="Recipe processing application image">
+            </a>
             <section class="project-card-right">
               <section class="project-card-right-top">
-                <h2>Recipe processing application</h2>
+                <h2><a href="/pages/study-cases/recipe-app.html">Recipe processing application</a></h2>
                 <h3>The aim of this project is to manipulate and analyze a set of recipes in XML format, using a functional programming approach in Java.</h3>
               </section>
               <section class="project-card-right-bottom">
@@ -97,11 +104,13 @@
           </section>
 
           <!--Database modeling-->
-          <section class="project-card academic-work">
-            <img src="/images/cases-img/databaseModeling.png" alt="Database modeling project image">
+          <section class="project-card academic-work animated-section-bottom">
+            <a href="/pages/study-cases/database-modeling.html">
+              <img src="/images/cases-img/databaseModeling.png" alt="Database modeling project image">
+            </a>
             <section class="project-card-right">
               <section class="project-card-right-top">
-                <h2>Database modeling</h2>
+                <h2><a href="/pages/study-cases/database-modeling.html">Database modeling</a></h2>
                 <h3>This project revolves around the modeling, standardization and implementation of a relational database (PostgreSQL) to efficiently manipulate and analyze a set of marriage data extracted from departmental archives.</h3>
               </section>
               <section class="project-card-right-bottom">
@@ -114,11 +123,13 @@
           </section>
 
           <!--Companion virus-->
-          <section class="project-card academic-work">
-            <img src="/images/cases-img/virus.png" alt="Companion virus project image">
+          <section class="project-card academic-work animated-section-bottom">
+            <a href="/pages/study-cases/companion-virus.html">
+              <img src="/images/cases-img/virus.png" alt="Companion virus project image">
+            </a>
             <section class="project-card-right">
               <section class="project-card-right-top">
-                <h2>Companion virus</h2>
+                <h2><a href="/pages/study-cases/companion-virus.html">Companion virus</a></h2>
                 <h3>This project involves the design and implementation of a functional companion virus, with credible utilities, in order to experiment with the propagation, infection and concealment mechanisms specific to computer viruses in an educational security context.</h3>
               </section>
               <section class="project-card-right-bottom">
@@ -130,29 +141,14 @@
             </section>
           </section>
 
-          <!--Graph traversal project-->
-          <section class="project-card academic-work">
-            <img src="/images/cases-img/graphAlgo.png" alt="Graph traversal project image">
-            <section class="project-card-right">
-              <section class="project-card-right-top">
-                <h2>Graph traversal project</h2>
-                <h3>This project involves implementing and analyzing various shortest-path computation algorithms (including Dijkstra and Akiba), studying their performance (execution time) on a randomly generated graph, all in a Jupyter notebook to report on implementation and experimentation.</h3>
-              </section>
-              <section class="project-card-right-bottom">
-                <ul>
-                  <li>#academic-work</li>
-                </ul>
-                <a href="/pages/study-cases/graph-traversal.html">Learn more</a>
-              </section>
-            </section>
-          </section>
-
           <!--Smartphone development project-->
-          <section class="project-card academic-work">
-            <img src="/images/cases-img/smartphoneApp.png" alt="Smartphone development project image">
+          <section class="project-card academic-work animated-section-bottom">
+            <a href="/pages/study-cases/smartphone-application.html">
+              <img src="/images/cases-img/smartphoneApp.png" alt="Smartphone development project image">
+            </a>
             <section class="project-card-right">
               <section class="project-card-right-top">
-                <h2>Smartphone development project</h2>
+                <h2><a href="/pages/study-cases/smartphone-application.html">Smartphone development project</a></h2>
                 <h3>This project consists of developing an 8 checkers application for smartphones, including help functions, customization (background, colors, pieces), and a polished interface to offer an immersive, modular user experience.</h3>
               </section>
               <section class="project-card-right-bottom">
@@ -165,11 +161,13 @@
           </section>
 
           <!--Lowkey-->
-          <section class="project-card academic-work web-project design">
-            <img src="/images/cases-img/lowkey.png" alt="Lowkey project image">
+          <section class="project-card academic-work web-project design animated-section-bottom">
+            <a href="/pages/study-cases/lowkey.html">
+              <img src="/images/cases-img/lowkey.png" alt="Lowkey project image">
+            </a>
             <section class="project-card-right">
               <section class="project-card-right-top">
-                <h2>“Lowkey” - Web development project</h2>
+                <h2><a href="/pages/study-cases/lowkey.html">“Lowkey” - Web development project</a></h2>
                 <h3>“Lowkey” is a web application featuring articles written by the Lowkey media. Using Symfony technology for the backend and VueJS for the frontend.</h3>
               </section>
               <section class="project-card-right-bottom">
@@ -182,25 +180,6 @@
               </section>
             </section>
           </section>
-
-          <!--Symphonie-->
-          <section class="project-card academic-work web-project">
-            <img src="/images/cases-img/symphonie.png" alt="Symphonie project image">
-            <section class="project-card-right">
-              <section class="project-card-right-top">
-                <h2>“Symphonie” - Web development project</h2>
-                <h3>“Symphonie” is a web application for showcasing music albums of all kinds. Using Symfony technology for the backend and VueJS for the frontend.</h3>
-              </section>
-              <section class="project-card-right-bottom">
-                <ul>
-                  <li>#academic-work</li>
-                  <li>#web-project</li>
-                </ul>
-                <a href="/pages/study-cases/symphonie.html">Learn more</a>
-              </section>
-            </section>
-          </section>
-
         </section>
 
       </main>
@@ -237,5 +216,7 @@
           document.querySelector('[data-filter="all"]').click();
         });
       </script>
+      <script src="/src/main.js"></script>
+      <script src="/src/gsap.js" type="module"></script>
   </body>
 </html>

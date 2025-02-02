@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/images/cases-img/icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/images/icon.png" />
     <link rel="stylesheet" href="/src/reset.css">
     <link rel="stylesheet" href="/src/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,150 +12,163 @@
   <body>
     <div id="app">
       <header>
-        <p id="icon">:)</p>
-        <h1>Your PC ran into my portfolio and needs to explore it. <br>We’re just collecting some of my previous work, and then we’ll show them to you.</h1>
+        <p id="icon" class="animated-section-top">:)</p>
+        <h1 id="typewriter-container"></h1>
         <section class="loader-section"><h1 id="loader">0</h1><h1>% complete</h1></section>
-        <h3>You are on the portfolio of : <button id="name">ARTHUR_GILLIER</button></h3>
+        <h3 class="animated-section-left">You are on the portfolio of : <button id="name">ARTHUR_GILLIER</button></h3>
       </header>
       <main>
-        <section class="selected-cases">
-          <h1>Selected study cases</h1>
+        <section id="selected-cases">
+          <h1 class="animated-section-left">Selected study cases</h1>
           <!--La Bête-->
-          <section class="project-card">
-            <img src="/images/cases-img/labete.png">
-            <section class="project-card-right">
-              <section class="project-card-right-top">
-                <h2>"La Bête" - Web development project</h2>
+          <section class="project-card animated-section animated-section-bottom">
+            <a href="/pages/study-cases/la-bete.html">
+              <img src="/images/cases-img/labete.png" alt="La Bête project image">
+            </a>
+            <div class="project-card-right">
+              <div class="project-card-right-top">
+                <h2><a href="/pages/study-cases/la-bete.html">La Bête</a></h2>
                 <h3>Design and development work around the musical project “La Bête” by two French musical artists.</h3>
-              </section>
-              <section class="project-card-right-bottom">
+              </div>
+              <div class="project-card-right-bottom">
                 <ul>
                   <li>#web-project</li>
                   <li>#design</li>
                 </ul>
                 <a href="/pages/study-cases/la-bete.html">Learn more</a>
-              </section>
-            </section>
+              </div>
+            </div>
           </section>
-
-          <!--Argenteurs-->
-          <section class="project-card">
-            <img src="/images/cases-img/argenteurs.png" alt="Argenteurs project image">
-            <section class="project-card-right">
-              <section class="project-card-right-top">
-                <h2>"Argenteurs" - Web development project</h2>
+          
+          <!-- Argenteurs -->
+          <section class="project-card animated-section animated-section-bottom">
+            <a href="/pages/study-cases/argenteurs.html">
+              <img src="/images/cases-img/argenteurs.png" alt="Argenteurs project image">
+            </a>
+            <div class="project-card-right">
+              <div class="project-card-right-top">
+                <h2><a href="/pages/study-cases/argenteurs.html">Argenteurs</a></h2>
                 <h3>Webdesign around the “Argenteurs” photography collective and their events.</h3>
-              </section>
-              <section class="project-card-right-bottom">
+              </div>
+              <div class="project-card-right-bottom">
                 <ul>
                   <li>#web-project</li>
                   <li>#design</li>
                 </ul>
                 <a href="/pages/study-cases/argenteurs.html">Learn more</a>
-              </section>
-            </section>
+              </div>
+            </div>
           </section>
-
-          <!--0-119 esone-->
-          <section class="project-card">
-            <img src="/images/cases-img/esone.png" alt="0-119 Esone project image">
-            <section class="project-card-right">
-              <section class="project-card-right-top">
-                <h2>"0-119" - Web development project</h2>
+          
+          <!-- 0-119 esone -->
+          <section class="project-card animated-section animated-section-bottom">
+            <a href="/pages/study-cases/esone.html">
+              <img src="/images/cases-img/esone.png" alt="0-119 Esone project image">
+            </a>
+            <div class="project-card-right">
+              <div class="project-card-right-top">
+                <h2><a href="/pages/study-cases/esone.html">0-119</a></h2>
                 <h3>Design and development work around the musical project “0-119” by a French musical artist.</h3>
-              </section>
-              <section class="project-card-right-bottom">
+              </div>
+              <div class="project-card-right-bottom">
                 <ul>
                   <li>#web-project</li>
                   <li>#design</li>
                 </ul>
                 <a href="/pages/study-cases/esone.html">Learn more</a>
-              </section>
-            </section>
+              </div>
+            </div>
           </section>
-
-          <!--Recipe processing App-->
-          <section class="project-card">
-            <img src="/images/cases-img/recipeApp.png" alt="Recipe processing application image">
-            <section class="project-card-right">
-              <section class="project-card-right-top">
-                <h2>Recipe processing application</h2>
+          
+          <!-- Recipe processing App -->
+          <section class="project-card animated-section animated-section-bottom">
+            <a href="/pages/study-cases/recipe-app.html">
+              <img src="/images/cases-img/recipeApp.png" alt="Recipe processing application image">
+            </a>
+            <div class="project-card-right">
+              <div class="project-card-right-top">
+                <h2><a href="/pages/study-cases/recipe-app.html">Recipe processing application</a></h2>
                 <h3>The aim of this project is to manipulate and analyze a set of recipes in XML format, using a functional programming approach in Java.</h3>
-              </section>
-              <section class="project-card-right-bottom">
+              </div>
+              <div class="project-card-right-bottom">
                 <ul>
                   <li>#academic-work</li>
                 </ul>
                 <a href="/pages/study-cases/recipe-app.html">Learn more</a>
-              </section>
-            </section>
+              </div>
+            </div>
           </section>
-
-          <!--Database modeling-->
-          <section class="project-card">
-            <img src="/images/cases-img/databaseModeling.png" alt="Database modeling project image">
-            <section class="project-card-right">
-              <section class="project-card-right-top">
-                <h2>Database modeling</h2>
+          
+          <!-- Database modeling -->
+          <section class="project-card animated-section animated-section-bottom">
+            <a href="/pages/study-cases/database-modeling.html">
+              <img src="/images/cases-img/databaseModeling.png" alt="Database modeling project image">
+            </a>
+            <div class="project-card-right">
+              <div class="project-card-right-top">
+                <h2><a href="/pages/study-cases/database-modeling.html">Database modeling</a></h2>
                 <h3>This project revolves around the modeling, standardization and implementation of a relational database (PostgreSQL) to efficiently manipulate and analyze a set of marriage data extracted from departmental archives.</h3>
-              </section>
-              <section class="project-card-right-bottom">
+              </div>
+              <div class="project-card-right-bottom">
                 <ul>
                   <li>#academic-work</li>
                 </ul>
                 <a href="/pages/study-cases/database-modeling.html">Learn more</a>
-              </section>
-            </section>
+              </div>
+            </div>
           </section>
-
-          <!--Companion virus-->
-          <section class="project-card">
-            <img src="/images/cases-img/virus.png" alt="Companion virus project image">
-            <section class="project-card-right">
-              <section class="project-card-right-top">
-                <h2>Companion virus</h2>
+          
+          <!-- Companion virus -->
+          <section class="project-card animated-section animated-section-bottom">
+            <a href="/pages/study-cases/companion-virus.html">
+              <img src="/images/cases-img/virus.png" alt="Companion virus project image">
+            </a>
+            <div class="project-card-right">
+              <div class="project-card-right-top">
+                <h2><a href="/pages/study-cases/companion-virus.html">Companion virus</a></h2>
                 <h3>This project involves the design and implementation of a functional companion virus, with credible utilities, in order to experiment with the propagation, infection and concealment mechanisms specific to computer viruses in an educational security context.</h3>
-              </section>
-              <section class="project-card-right-bottom">
+              </div>
+              <div class="project-card-right-bottom">
                 <ul>
                   <li>#academic-work</li>
                 </ul>
-                <a href="/pages/study-cases/database-modeling.html">Learn more</a>
-              </section>
-            </section>
+                <a href="/pages/study-cases/companion-virus.html">Learn more</a>
+              </div>
+            </div>
           </section>
-          <h2>Want to see other cases? Click <a href="/pages/study-cases.html">here</a></h1>
+          
+          <h2 class="animated-section animated-section-left">Want to see other cases? Click <a href="/pages/study-cases.html">here</a></h1>
         </section>
 
         <section id="about">
           <section class="about-top">
-            <h2>Thanks for scrolling down so far, I'm Arthur, a young French developer. During my studies I was able to explore many areas of computer science such as database modeling and algorithm manipulation. But lately my real passion is web development.</h2>
-            <a href="https://esone.vercel.app/"><img src="/images/about-dev.png"></a>
+            <h2 class="animated-section animated-section-left">Thanks for scrolling down so far, I'm Arthur, a young French developer. During my studies I was able to explore many areas of computer science such as database modeling and algorithm manipulation. But lately my real passion is web development.</h2>
+            <a class="animated-section animated-section-right" href="https://esone.vercel.app/"><img src="/images/about-dev.png"></a>
           </section>
           <section class="about-bottom">
-            <a href="https://youtu.be/l1Xps66vyFo?si=U9nWsFHreCJKdiDN"><img src="/images/about-passions.png"></a>
-            <h2>As you may have gathered from my various projects, I'm passionate about music, and love creating projects around it. I'm also a nature lover, and from time to time get lost in the mountains to reconnect.</h2>
+            <a class="animated-section animated-section-left" href="https://youtu.be/l1Xps66vyFo?si=U9nWsFHreCJKdiDN"><img src="/images/about-passions.png"></a>
+            <h2 class="animated-section animated-section-right">As you may have gathered from my various projects, I'm passionate about music, and love creating projects around it. I'm also a nature lover, and from time to time get lost in the mountains to reconnect.</h2>
           </section>
         </section>
 
         <section id="contact">
           <section class="contact-left">
-            <h1>Don’t hesitate to get in touch with me! <br> And contact me by <a href="mailto:arthur.gillier17@gmail.com">mail</a>!</h1>
+            <h1 class="animated-section animated-section-left">Don’t hesitate to get in touch with me! <br> And contact me by <a href="mailto:arthur.gillier17@gmail.com">mail</a>!</h1>
             <section class="contact-internet">
-              <h1>Or on the Internet</h1>
-              <ul>
+              <h1 class="animated-section animated-section-left">Or on the Internet</h1>
+              <ul class="animated-section animated-section-bottom">
                 <li><a href="https://github.com/seg1-exe"><i class="fa-brands fa-github"></i></a></li>
                 <li><a href="https://www.linkedin.com/in/arthur-gillier/"><i class="fa-brands fa-linkedin"></i></a></li>
                 <li><a href="https://www.instagram.com/kvlar.studio/"><i class="fa-brands fa-instagram"></i></a></li>
               </ul>
             </section>
           </section>
-          <a href="https://maps.app.goo.gl/XSqDoeqQH3XMTntP9"><img src="/images/me.png"></a>
+          <a class="animated-section animated-section-right" href="https://maps.app.goo.gl/XSqDoeqQH3XMTntP9"><img src="/images/me.png"></a>
         </section>
 
       </main>
 
-      <footer>
+      <footer class="animated-section">
         <a href="/index.html">Homepage</a>
         <a href="/index.html#about">About</a>
         <a href="/index.html#contact">Contact</a>
@@ -168,57 +181,70 @@
     const nameElement = document.getElementById('name');
     const appElement = document.getElementById('app');
     const iconElement = document.getElementById('icon');
+    const selectedCases = document.getElementById('selected-cases');
     
     let count = 0;
     let clickCount = 0;
     let firstClickTime = null;
     let colorChanged = false;
+    let hasSeenSelectedCases = false;
+
+    function checkSelectedCasesVisibility() {
+      const rect = selectedCases.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        hasSeenSelectedCases = true;
+        window.removeEventListener('scroll', checkSelectedCasesVisibility);
+      }
+    }
+
+    window.addEventListener('scroll', checkSelectedCasesVisibility);
     
     // boucle pour loader
     const interval = setInterval(() => {
-        if (count <= 100) {
-            loader.innerText = count; 
+      if (count <= 100) {
+        loader.innerText = count;
         count++;
-        } else {
+      } else {
         clearInterval(interval);
+        if (!hasSeenSelectedCases) {
+          selectedCases.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
         }
-    }, 30);
+      }
+    }, 60);
 
-    // changement rsod
+    // changement rsod-bsod
     nameElement.addEventListener('click', () => {
-    const currentTime = new Date().getTime();  // Déclaration correcte de currentTime
+    const currentTime = new Date().getTime(); 
 
-    // Si c'est le premier clic, initialiser le temps du premier clic
     if (firstClickTime === null) {
       firstClickTime = currentTime;
     }
 
-    // Vérifier si les clics sont effectués dans les 30 secondes
     if (currentTime - firstClickTime <= 30000) {
       clickCount++;
     } else {
-      // Réinitialiser les compteurs si plus de 30 secondes se sont écoulées
       firstClickTime = currentTime;
       clickCount = 1;
     }
 
-    // Si 10 clics ont été effectués dans les 30 secondes, effectuer l'action
     if (clickCount >= 10) {
       if (colorChanged) {
-        // Si la couleur a déjà été changée, revenir à la couleur d'origine
         appElement.style.backgroundColor = '';
         iconElement.innerText = ':)';
-        colorChanged = false; // Réinitialiser l'état de la couleur
+        colorChanged = false; 
       } else {
-        // Si la couleur n'a pas été changée, la changer en rouge
         appElement.style.backgroundColor = '#D7322D';
         iconElement.innerText = '>:D';
-        colorChanged = true; // Mettre à jour l'état de la couleur
+        colorChanged = true;
       }
-
-      // Réinitialiser le compteur après l'action
-      clickCount = 0;
-    }
-  });
+        clickCount = 0;
+      }
+    });
+  
   </script>
+  <script src="/src/main.js"></script>
+  <script src="/src/gsap.js" type="module"></script>
 </html>

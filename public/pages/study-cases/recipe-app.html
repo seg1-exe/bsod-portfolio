@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/icon.png" />
+    <link rel="stylesheet" href="/src/reset.css">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/github-markdown-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/847debfb6c.js" crossorigin="anonymous"></script>
+    <script src="/src/main.js" type="module"></script>
+    <title>Arthur Gillier</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <p class="animated-section-top">:)</p>
+        <h1 class="animated-section-left">Your PC ran into this case study and needs to explore it.</h1>
+        <h3 class="animated-section-left">For more info on : RECIPE_PROCESSING_APP_CASE_STUDY</h3>
+        <a class="animated-section-left" href="/pages/study-cases.html"><i class="fa-solid fa-arrow-left"></i> Go back</a>
+      </header>
+      <main class="study-case">
+        <section class="study-case-title">
+            <img class="animated-section-left" src="/images/cases-img/recipeApp.png">
+            <section class="animated-section-right">
+                <h1>Recipe processing application</h1>
+                <h3>Java application for analyzing XML recipes, with filtering, statistics and graphical interface.</h3>
+            </section>
+        </section>
+
+        <section>
+            <h3 class="animated-section-left">This project involves creating a Java application based on functional programming to process a set of recipes in XML format. Using Java's Stream API, the application enables data to be filtered, transformed and aggregated (for example, to calculate nutritional statistics or identify the most frequent ingredients). It offers two interfaces: a textual one for rapid access to results, and a graphical one (JavaFX) for more interactive exploration of recipes. The project highlights the effectiveness of the functional paradigm for processing semi-structured data in a clear, modular way.</h2>
+        </section>
+
+        <div class="markdown-report">
+            <h1 class="animated-section-left">Project report</h1>
+            <button class="language-btn animated-section-left" onclick="toggleLanguage()">FR</button>
+            <div class="english-report markdown-body">
+                <h1 id="functional-programming-project">Functional Programming Project</h1>
+                <p><strong>Arthur Gillier</strong></p>
+                <h2 id="summary">Summary</h2>
+                <p>This project focuses on the manipulation and analysis of a set of cooking recipes in XML format, using a functional programming approach in Java. By leveraging the Streams API in Java, the project implements classical operations such as filtering, transformation, and data aggregation (following the Map/Filter/Reduce pattern). The results are accessible through two interfaces – textual (via the command line) and graphical (using JavaFX) – enabling easy exploration of recipes, their ingredients, nutritiona...</p>
+                <p>Beyond simple consultation, the application allows for more advanced analyses (e.g., calculating the total number of eggs used, identifying the lightest recipes in terms of calories, determining the most frequently used ingredient, etc.), thereby demonstrating the effectiveness of functional programming in efficiently handling semi-structured data.</p>
+                <h2 id="introduction">Introduction</h2>
+                <p>In a context where culinary data is increasingly available in digital format, the objective of this project is to develop a Java application centered on the functional programming paradigm to process a corpus of recipes from an XML file. This work is part of the pedagogical framework of the University of La Rochelle, aimed at consolidating skills in functional programming, API Stream manipulation, and object-oriented design.</p>
+                <p>The originality of this application lies in its intensive use of functional operations available in Java (map, filter, reduce, collect) to extract meaningful insights from a heterogeneous set of culinary data.</p>
+                <h2 id="context-and-objectives">Context and Objectives</h2>
+                <p>The pedagogical and technical objectives are manifold:</p>
+                <ul>
+                <li><strong>Understanding the functional programming paradigm in Java</strong>: Practicing lambdas, functional interfaces, and streams.</li>
+                <li><strong>Data extraction and structuring</strong>: Reading an XML file, parsing it, and initializing an internal collection of recipes.</li>
+                <li><strong>Advanced data processing</strong>: Calculating statistics (total number of eggs, calorific quantities), customized filtering (recipes with fewer than 500 calories, without butter, etc.), and aggregations (most used ingredient, step distribution).</li>
+                <li><strong>Dual presentation interface</strong>: A textual interface for quick access to results, and a graphical interface (JavaFX or Swing) for more intuitive visualization.</li>
+                </ul>
+                <h2 id="system-architecture">System Architecture</h2>
+                <p>The code is organized into several packages, reflecting a modular approach:</p>
+                <ol>
+                <li><p><code>models</code>: Contains classes modeling domain entities, notably:</p>
+                <ul>
+                <li><strong>Recipe</strong>: Represents a recipe with its title, date, ingredients, nutritional information, a comment, and links to other recipes (related).</li>
+                <li><strong>Ingredient</strong>: Represents an ingredient, associated with a name, quantity, unit, and a potential list of composite ingredients. This class also stores preparation steps related to the ingredient.</li>
+                <li><strong>Nutrition</strong>: Encapsulates the nutritional information of a recipe (proteins, carbohydrates, fats, calories).</li>
+                <li><strong>Related</strong>: Establishes links between different recipes.</li>
+                </ul>
+                </li>
+                <li><p><code>repositories</code>: Contains the <code>RecipeRepo</code> class responsible for data management. It handles:</p>
+                <ul>
+                <li>Loading the XML file (<code>recipes.xml</code>) and creating <code>Recipe</code> objects.</li>
+                <li>Providing semantically rich access and processing methods (e.g., listing titles, calculating ingredients, filtering by various constraints).</li>
+                </ul>
+                </li>
+                <li><p><code>presentation</code>: Classes related to display and user interaction.</p>
+                <ul>
+                <li><strong>RecipePrincipal</strong>: Entry point of the application, manages the choice between textual and graphical interfaces, loads the repository, and interacts with the user.</li>
+                <li><strong>ResultWindow</strong> (example): Graphical presentation of results.</li>
+                </ul>
+                </li>
+                </ol>
+                <p>This architecture clearly separates business logic (data extraction and processing) from presentation, promoting maintainability and extensibility of the application.</p>
+                <h2 id="entity-modeling">Entity Modeling</h2>
+                <h3 id="-recipe-class"><code>Recipe</code> Class</h3>
+                <p>A <code>Recipe</code> is defined by a unique identifier, a title, a date, a list of ingredients (<code>List&lt;Ingredient&gt;</code>), nutritional information (<code>Nutrition</code>), an optional comment, and a reference to other recipes (via <code>Related</code>).</p>
+                <p>Key characteristics include:</p>
+                <ul>
+                <li><code>List&lt;Ingredient&gt; ingredients</code>: List of main ingredients in the recipe.</li>
+                <li><code>Nutrition nutrition</code>: Information on proteins, carbohydrates, fats, and calories.</li>
+                <li>Setter/getter methods to manipulate these attributes.</li>
+                </ul>
+                <h3 id="-ingredient-class"><code>Ingredient</code> Class</h3>
+                <p><code>Ingredient</code> encapsulates a name, a quantity, a unit of measurement, a potential list of nested ingredients (for complex compositions), and a list of preparation steps.</p>
+                <p>Key characteristics include:</p>
+                <ul>
+                <li><code>List&lt;String&gt; steps</code>: Preparation steps associated with the ingredient, enabling the association of not just a quantity but also a specific operational mode for the ingredient.</li>
+                </ul>
+                <p>This level of granularity allows for a detailed modeling of recipes, which may include composite or multi-layered ingredients.</p>
+                <h3 id="-nutrition-related-classes"><code>Nutrition</code> &amp; <code>Related</code> Classes</h3>
+                <ul>
+                <li><strong><code>Nutrition</code></strong>: Describes the nutritional value of a recipe (calories, proteins, etc.).</li>
+                <li><strong><code>Related</code></strong>: Links one recipe to another, for example, to provide suggestions for complementary recipes.</li>
+                </ul>
+                <h2 id="user-interface">User Interface</h2>
+                <h3 id="textual-interface">Textual Interface</h3>
+                <p>The textual interface enables simple interaction directly in the console. The user can select an operation (e.g., display titles, calculate the total number of eggs) and immediately view the result.</p>
+                <h3 id="graphical-interface">Graphical Interface</h3>
+                <p>The graphical interface offers a main window with navigation options, the ability to display results in a dedicated window, and, where applicable, a more user-friendly interaction (buttons, dropdown menus, etc.).</p>
+                <h2 id="analysis-and-results">Analysis and Results</h2>
+                <p>Thanks to the implemented processes, the application highlights various useful insights:</p>
+                <ul>
+                <li><strong>Global statistics</strong>: Total number of eggs, most caloric recipe, step distribution across recipes, etc.</li>
+                <li><strong>Semantic filtering</strong>: Recipes without butter, recipes with olive oil, or those not exceeding a certain calorie threshold.</li>
+                <li><strong>Specific points</strong>: The first two steps of the &quot;Zuppa Inglese&quot; recipe, the most frequent unit of measurement, the most used ingredient, etc.</li>
+                </ul>
+                <p>These results illustrate the flexibility offered by the Stream API, enabling declarative data manipulation that is more concise and clearer than traditional imperative loops and conditions.</p>
+                <h2 id="challenges-and-limitations">Challenges and Limitations</h2>
+                <ul>
+                <li><strong>XML Parsing</strong>: Processing the file required learning the DOM API. While functional, it can be verbose. Using other solutions (StAX, JAXB) could simplify the code.</li>
+                <li><strong>Incomplete or Heterogeneous Data</strong>: Some recipes lack certain units or only have textual quantities (&quot;*&quot;). The code handles these cases but at the cost of numerous checks.</li>
+                <li><strong>Learning JavaFX</strong>: The graphical interface was created with JavaFX, a framework I was discovering for the first time. Without prior training, learning was done directly during the project, increasing development time and research effort. However, this experience provided a new technical skill.</li>
+                <li><strong>Scalability</strong>: Adding new filtering criteria or analytical methods is straightforward with the functional approach, but scalability also depends on the structure of the input data.</li>
+                </ul>
+                <h2 id="future-perspectives">Future Perspectives</h2>
+                <ul>
+                <li><strong>Improved Parsing</strong>: Use a higher-level library (e.g., JAXB) to reduce code complexity in initialization.</li>
+                <li><strong>Indexing and Performance</strong>: Introduce more efficient data structures or a caching system to speed up recurring calculations for larger datasets.</li>
+                <li><strong>User Experience</strong>: Enhance the graphical interface, provide dynamic filters, and integrate visualizations (histograms, pie charts) to illustrate ingredient distributions, units, or calories.</li>
+                </ul>
+                <h2 id="conclusion">Conclusion</h2>
+                <p>This project demonstrates the effectiveness of the functional programming paradigm for processing semi-structured data in Java. The use of Streams, combined with a clearly defined modular architecture (separation of model, data repository, and presentation), enables elegant and maintainable implementation.</p>
+                <p>The resulting application can easily be extended to other types of culinary or dietary data and serves as a practical example of implementing functional programming concepts, data normalization, and collection manipulation in Java.</p>
+                <h2 id="acknowledgments">Acknowledgments</h2>
+                <ul>
+                <li>Thanks to the instructors at the University of La Rochelle for their guidance and support throughout this project.</li>
+                <li>Inspiration for parser creation: <a href="https://www.epai-ict.ch/ict-modules/activities/m100-a7">Article by Jérôme Frossard</a>.</li>
+                <li>Setting up JavaFX: <a href="https://www.youtube.com/watch?v=9Fy7f1K7Yec">Khadija EL AZHARI&#39;s video tutorial</a> and <a href="https://stackoverflow.com/questions/53795661/javafx-modular-application-java-lang-module-findexception-module-javafx-contro">Stack Overflow article</a>.</li>
+                </ul>
+                <h2 id="authors">Authors</h2>
+                <ul>
+                <li>Arthur Gillier</li>
+                <li>Subject of the University of La Rochelle</li>
+                <li>Writing help from ChatGPT</li>
+                </ul>
+
+            </div>
+
+            <div class="french-report markdown-body bigImg" style="display: none;">
+                <h1 id="projet-de-programmation-fonctionnelle">Projet de programmation fonctionnelle</h1>
+                <p><strong>Gillier Arthur</strong></p>
+                <h2 id="r-sum-">Résumé</h2>
+                <p>Ce projet a pour objet la manipulation et l’analyse d’un ensemble de recettes de cuisine au format XML, en s’appuyant sur une approche de programmation fonctionnelle en Java. En recourant aux flux (Streams) de l’API Java, le projet met en œuvre les opérations classiques de filtrage, de transformation et d’agrégation des données (pattern Map/Filter/Reduce). Les résultats sont accessibles via deux interfaces – textuelle (via le terminale de commande) et graphique (en utilisant JavaFX) – permettant d’explorer facilement les recettes, leurs ingrédients, leurs valeurs nutritionnelles, ainsi que divers attributs qualitatifs (commentaires, étapes, etc.).</p>
+                <p>Au-delà de la simple consultation, l’application permet des analyses plus avancées (calcul du nombre total d’œufs utilisés, identification des recettes les plus légères en calories, détermination de l’ingrédient le plus fréquent, etc.), démontrant ainsi la pertinence de la programmation fonctionnelle pour traiter efficacement des données semi-structurées.</p>
+                <h2 id="introduction">Introduction</h2>
+                <p>Dans un contexte où les données culinaires sont de plus en plus disponibles sous format numérique, l’objectif de ce projet est de développer une application Java centrée sur le paradigme fonctionnel, afin de traiter un corpus de recettes issues d’un fichier XML. Ce travail s’inscrit dans le cadre pédagogique de l’Université de La Rochelle, visant à consolider les compétences en programmation fonctionnelle, en manipulation d’API Stream, et en conception orientée-objet.</p>
+                <p>La principale originalité de cette application réside dans son utilisation intensive des opérations fonctionnelles disponibles en Java (map, filter, reduce, collect), dans le but d’extraire des connaissances pertinentes à partir d’un ensemble hétérogène de données culinaires.</p>
+                <h2 id="contexte-et-objectifs">Contexte et Objectifs</h2>
+                <p>Les objectifs pédagogiques et techniques sont multiples :</p>
+                <ul>
+                <li>Compréhension du paradigme fonctionnel en Java : Mise en pratique des lambdas, interfaces fonctionnelles et streams.</li>
+                <li>Extraction et structuration des données : Lecture d’un fichier XML, parsing et initialisation d’une collection interne de recettes.</li>
+                <li>Traitements avancés sur les données : Calcul de statistiques (nombre total d’œufs, quantités calorifiques), filtrages personnalisés (recettes à moins de 500 calories, sans beurre, etc.), et agrégations (ingrédient le plus utilisé, répartition par étapes).</li>
+                <li>Double interface de présentation : Une interface textuelle pour un accès rapide aux résultats, et une interface graphique (JavaFX ou Swing) pour une visualisation plus intuitive.</li>
+                </ul>
+                <h2 id="architecture-du-syst-me">Architecture du système</h2>
+                <p>Le code est organisé en plusieurs packages, reflétant une approche modulaire :</p>
+                <ol>
+                <li><p><code>models</code> : Contient les classes qui modélisent les entités du domaine, notamment :</p>
+                <ul>
+                <li><strong>Recipe</strong> : Représente une recette avec son titre, sa date, ses ingrédients, ses informations nutritionnelles, un commentaire et un lien vers d’autres recettes (related).</li>
+                <li><strong>Ingredient</strong> : Représente un ingrédient, associé à un nom, une quantité, une unité et une liste éventuelle d’ingrédients composés. Cette classe stocke également les étapes de préparation qui s’y rattachent.</li>
+                <li><strong>Nutrition</strong> : Encapsule les informations nutritionnelles d’une recette (protéines, glucides, lipides, calories).</li>
+                <li><strong>Related</strong> : Permet d’établir des liens entre différentes recettes.</li>
+                </ul>
+                </li>
+                <li><p><code>repositories</code> : Contient la classe <code>RecipeRepo</code> chargée de la gestion des données. Elle assure notamment :</p>
+                <ul>
+                <li>Le chargement du fichier XML (<code>recipes.xml</code>) et la création des objets Recipe.</li>
+                <li>La mise à disposition de méthodes d’accès et de traitement sémantiquement riches (listage des titres, calculs d’ingrédients, filtrage par contraintes diverses).</li>
+                </ul>
+                </li>
+                <li><p><code>presentation</code> : Classes liées à l’affichage et à l’interaction avec l’utilisateur.</p>
+                <ul>
+                <li><strong>RecipePrincipal</strong> : Point d’entrée de l’application, gestion du choix entre interface textuelle et graphique, chargement du référentiel, interaction avec l’utilisateur.</li>
+                <li><strong>ResultWindow</strong> (exemple) : Présentation graphique des résultats.</li>
+                </ul>
+                </li>
+                </ol>
+                <p>Cette architecture sépare nettement la logique métier (extraction et traitement des données) de la présentation, favorisant la maintenabilité et l’extensibilité de l’application.</p>
+                <h2 id="mod-lisation-des-entit-s">Modélisation des entités</h2>
+                <h3 id="classe-recipe-">Classe <code>Recipe</code></h3>
+                <p>Une <code>Recipe</code> est définie par un identifiant unique, un titre, une date, une liste d’ingrédients (<code>List&lt;Ingredient&gt;</code>), des informations nutritionnelles (<code>Nutrition</code>), un commentaire facultatif et une référence à d’autres recettes (via <code>Related</code>).</p>
+                <p>Extrait caractéristique :</p>
+                <ul>
+                <li><code>List&lt;Ingredient&gt; ingredients</code> : Liste des ingrédients principaux de la recette.</li>
+                <li><code>Nutrition nutrition</code> : Informations protéiques, glucidiques, lipidiques et caloriques.</li>
+                <li>Méthodes setter/getter pour manipuler ces attributs.</li>
+                </ul>
+                <h3 id="classe-ingredient-">Classe <code>Ingredient</code></h3>
+                <p><code>Ingredient</code> encapsule un nom, une quantité, une unité de mesure, une liste éventuelle d’ingrédients imbriqués (pour les compositions complexes), ainsi qu’une liste d’étapes de préparation.</p>
+                <p>Extrait caractéristique :</p>
+                <ul>
+                <li><code>List&lt;String&gt; steps</code> : Les étapes de préparation associées à l’ingrédient, permettant d’associer non seulement une quantité, mais aussi un mode opératoire spécifique à cet ingrédient.</li>
+                </ul>
+                <p>Ce niveau de granularité permet une modélisation fine des recettes, qui peuvent inclure des ingrédients composés ou plusieurs couches d’ingrédients.</p>
+                <h3 id="classes-nutrition-related-">Classes <code>Nutrition</code> &amp; <code>Related</code></h3>
+                <ul>
+                <li><code>Nutrition</code> : Décrit la valeur nutritionnelle d’une recette (calories, protéines, etc.).</li>
+                <li><code>Related</code> : Lie une recette à une autre, permettant par exemple d’établir des suggestions de recettes complémentaires.</li>
+                </ul>
+                <h2 id="interface-utilisateur">Interface utilisateur</h2>
+                <h3 id="interface-textuelle">Interface textuelle</h3>
+                <p>L’interface textuelle permet une interaction simple, directement dans la console. L’utilisateur peut sélectionner une opération (par ex. afficher les titres, calculer le nombre total d’œufs) et observer le résultat immédiatement.</p>
+                <h3 id="interface-graphique">Interface graphique</h3>
+                <p>L’interface graphique offre une fenêtre principale avec des options de navigation, la possibilité d’afficher les résultats dans une fenêtre dédiée et, le cas échéant, de proposer une interaction plus conviviale (boutons, menus déroulants, etc.).</p>
+                <h2 id="analyse-et-r-sultats">Analyse et résultats</h2>
+                <p>Grâce aux traitements implémentés, l’application met en lumière diverses informations utiles :</p>
+                <ul>
+                <li>Statistiques globales : Nombre total d’œufs, recette la plus calorique, répartition des recettes par étapes, etc.</li>
+                <li>Filtrages sémantiques : Recettes sans beurre, recettes avec de l’huile d’olive, ou ne dépassant pas un certain seuil calorique.</li>
+                <li>Points précis : Les deux premières étapes de la recette « Zuppa Inglese », l’unité de mesure la plus fréquente, l’ingrédient le plus utilisé, etc.</li>
+                </ul>
+                <p>Ces résultats illustrent la flexibilité offerte par l’API Stream, permettant une manipulation déclarative des données, plus concise et plus claire que des boucles et conditions impératives traditionnelles.</p>
+                <h2 id="difficult-s-rencontr-es-et-limitations">Difficultés rencontrées et limitations</h2>
+                <ul>
+                <li><strong>Parsing XML</strong> : Le traitement du fichier a nécessité une prise en main de l’API DOM. Bien que fonctionnelle, elle est parfois verbeuse. L’usage d’autres solutions (StAX, JAXB) pourrait simplifier le code.</li>
+                <li><strong>Données incomplètes ou hétérogènes</strong> : Certaines recettes peuvent omettre certaines unités, ou n’avoir que des quantités textuelles (« * »). Le code gère ces cas, mais au prix d’un certain nombre de vérifications.</li>
+                <li><strong>Découverte de JavaFX</strong> : L’interface graphique a été réalisée avec JavaFX, un framework graphique que je découvrais pour la première fois. Sans formation préalable, l’apprentissage s’est fait directement au cours du projet, rallongeant le temps de développement et l’effort de recherche. Cette expérience a toutefois permis d’acquérir une nouvelle compétence technique, mais a également augmenté la courbe d’apprentissage et la complexité des tâches d’implémentation.</li>
+                <li><strong>Évolutivité</strong> : L’ajout de nouveaux critères de filtrage ou de nouvelles méthodes analytiques est aisé grâce à l’approche fonctionnelle, mais l’évolutivité dépend également de la structure des données en entrée.</li>
+                </ul>
+                <h2 id="perspectives">Perspectives</h2>
+                <ul>
+                <li><strong>Amélioration du parsing</strong> : Utiliser une bibliothèque plus haut niveau (JAXB) pour réduire la complexité du code d’initialisation.</li>
+                <li><strong>Indexation et performances</strong> : Sur un jeu de données plus volumineux, introduire des structures de données plus efficaces, ou un système de cache pour accélérer certains calculs récurrents.</li>
+                <li><strong>Expérience utilisateur</strong> : Améliorer l’interface graphique, offrir des filtres dynamiques, intégrer des graphiques (histogrammes, camemberts) pour visualiser la répartition des ingrédients, des unités ou des calories.</li>
+                </ul>
+                <h2 id="conclusion">Conclusion</h2>
+                <p>Ce projet démontre l’efficacité du paradigme fonctionnel pour la manipulation de données semi-structurées en Java. L’usage des Streams, associé à une architecture modulaire clairement définie (distinction entre modèle, dépôt de données et présentation), permet une implémentation élégante et maintenable.</p>
+                <p>L’application produite peut aisément être étendue à d’autres types de données culinaires ou alimentaires, et sert d’exemple pratique pour la mise en œuvre des concepts de programmation fonctionnelle, de normalisation des données, et de manipulation des collections en Java.</p>
+                <h2 id="remerciements">Remerciements</h2>
+                <ul>
+                <li>Merci aux enseignants de l’Université de La Rochelle pour l’encadrement et le soutien dans la réalisation de ce projet.</li>
+                <li>Inspiration pour la création du parser : <a href="https://www.epai-ict.ch/ict-modules/activities/m100-a7">Article de Jérôme Frossard</a></li>
+                <li>Mise en place de JavaFX : <a href="https://www.youtube.com/watch?v=9Fy7f1K7Yec">Tutoriel vidéo de EL AZHARI KHADIJA</a> et <a href="https://stackoverflow.com/questions/53795661/javafx-modular-application-java-lang-module-findexception-module-javafx-contro">Article Stack Overflow</a></li>
+                </ul>
+                <h2 id="auteurs">Auteurs</h2>
+                <ul>
+                <li>Arthur Gillier</li>
+                <li>Sujet de l&#39;Université de La Rochelle</li>
+                <li>Aide à la rédaction par ChatGPT</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <section class="related-cases">
+          <h2 class="animated-section-left">Take a look at the next cases</h3>
+          <div class="cases-list">
+            <a href="/pages/study-cases/database-modeling.html">
+              <img src="/images/cases-img/databaseModeling.png">
+              <div>
+                <h3>Database modeling</h3>
+                <p>Modeling, standardization and implementation of a relational database (PostgreSQL) to efficiently manipulate and analyze a set of marriage data extracted from departmental archives.</p>
+              </div>
+            </a>
+            <a href="/pages/study-cases/companion-virus.html">
+              <img src="/images/cases-img/virus.png">
+              <div>
+                <h3>Companion virus</h3>
+                <p>Design and implementation of a functional companion virus, with credible utilities, in order to experiment with the propagation, infection and concealment mechanisms specific to computer viruses in an educational security context.</p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <a href="/index.html">Homepage</a>
+        <a href="/index.html#about">About</a>
+        <a href="/index.html#contact">Contact</a>
+        <a href="/pages/study-cases.html">Study cases</a>
+      </footer>
+    </div>
+  </body>
+  <script src="/src/main.js"></script>
+</html>
