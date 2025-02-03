@@ -1,4 +1,4 @@
-import { gsap } from "https://unpkg.com/gsap@3.11.4/dist/gsap.min.js";
+import gsap from "https://unpkg.com/gsap@3.11.4/dist/gsap.min.js";
 
 //Cursor
 gsap.set(".flair", {xPercent: 20, yPercent: 10});
