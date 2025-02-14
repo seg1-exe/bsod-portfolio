@@ -1,0 +1,48 @@
+@media (max-width: 1400px) {
+    #app{
+        padding: 32px 100px;
+    }
+
+    h1{font-size: 32px;}
+    h2{font-size: 28px;}
+    h3{font-size: 20px;}
+
+    header>p{font-size: 128px;}
+
+    header{
+        height: 100vh;
+    }
+
+    #about{
+        margin-top:0;
+        height: 100%;
+    }
+
+    .about-bottom>a>img{
+        width: 400px;
+    }
+
+    #contact>a>img{
+        width: 300px;
+    }
+
+    .contact-internet>ul li{
+        margin-right: 50px;
+    }
+
+    .contact-internet>ul>li>a>i{
+        font-size: 50px;
+    }
+
+    .project-card>a>img{
+        width: 500px;
+    }
+
+    .study-case>section>h3, .study-case>section>img, .study-case>section>video{
+        width: 500px;
+    }
+
+    .cases-list>a>img{
+        height: 100px;
+    }
+}
