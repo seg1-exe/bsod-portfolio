@@ -35,7 +35,7 @@ header>p{
 }
 
 header>h1{
-    width: 800px;
+    width: 100%;
 }
 
 header>*{
@@ -117,14 +117,22 @@ header>a{
     margin: 80px 0;
 }
 
+.about-bottom>a{
+    margin-right: 30px;
+}
+
 .about-top>h2, .about-bottom>h2{
-    width: 600px;
+    width: 40%;
+}
+
+.mobile-view{
+    display: none;
 }
 
 /**CONTACT**/
 
 #contact{
-    height: 50vh;
+    height: 100%;
     width: 100%;
     margin-top: 170px;
     padding-top: 30px;
@@ -147,6 +155,10 @@ header>a{
 
 .contact-internet>ul>li>a>i{
     font-size: 75px;
+}
+
+.about-top>a>img, .about-bottom>a>img, #contact>a>img{
+    width: 100%;
 }
 
 /* Footer */

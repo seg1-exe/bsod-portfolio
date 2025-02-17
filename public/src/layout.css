@@ -1,0 +1,138 @@
+@media (max-width: 1400px) {
+    #app{
+        padding: 32px 100px;
+    }
+
+    h1{font-size: 32px;}
+    h2{font-size: 28px;}
+    h3{font-size: 20px;}
+    #name{font-size: 20px;}
+
+    header>p{font-size: 128px;}
+
+    header{
+        height: 100vh;
+    }
+
+    #about{
+        margin-top:0;
+        height: 100%;
+    }
+
+    #contact>a>img{
+        width: 300px;
+    }
+
+    .contact-internet>ul li{
+        margin-right: 50px;
+    }
+
+    .contact-internet>ul>li>a>i{
+        font-size: 50px;
+    }
+
+    .project-card>a>img{
+        width: 500px;
+    }
+
+    .study-case>section>h3, .study-case>section>img, .study-case>section>video{
+        width: 500px;
+    }
+
+    .cases-list>a>img{
+        height: 100px;
+    }
+}
+
+@media (max-width: 1024px) {
+    h1{font-size: 28px;}
+    h2{font-size: 24px;}
+    h3{font-size: 16px;}
+    #name{font-size: 16px;}
+
+    .project-card>a>img{
+        width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1{font-size: 24px;}
+    h2{font-size: 20px;}
+
+
+    .project-card>a>img{
+        width: 250px;
+    }
+
+    .project-card{
+        margin: 40px 0;
+    }
+
+    #contact>a>img{
+        width: 200px;
+    }
+
+    .contact-internet>ul li{
+        margin-right: 40px;
+    }
+
+    .contact-internet>ul>li>a>i{
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    #app{
+        padding: 32px 20px;
+    }
+
+    header{
+        height: 70vh;
+    }
+
+    .project-card{
+        flex-direction: column;
+    }
+
+    .project-card-right{
+        margin: 10px 0 0 0;
+    }
+
+    .project-card-right-top{
+        margin-bottom: 30px;
+    }
+
+    .project-card>a>img{
+        width: 100%;
+    }
+
+    .about-top, .about-bottom{
+        flex-direction: column;
+    }
+
+    .about-top>h2, .about-bottom>h2{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    #contact{
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+
+    .contact-internet{
+        margin-top: 50px;
+    }
+
+    .mobile-view{
+        display: block;
+    }
+    .large-view{
+        display: none;
+    }
+
+    footer{
+        margin: 50px 0 0 0;
+    }
+}
