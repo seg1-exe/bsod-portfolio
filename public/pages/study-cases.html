@@ -18,7 +18,7 @@
         <h3 class="animated-section-left">You are on the portfolio of : <a href="/index.html">ARTHUR_GILLIER</a></h3>
       </header>
       <main>
-        <section class="selected-cases study-case">
+        <section class="selected-cases">
             <ul id="work-filter">
                 <li data-filter="all">All</li>
                 <li data-filter="web-project">Web projects</li>
@@ -188,6 +188,19 @@
       </footer>
     </div>
     <script>
+
+      const selectedCases = document.getElementById('selected-cases');
+      let hasSeenSelectedCases = false;
+      function checkSelectedCasesVisibility() {
+        const rect = selectedCases.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          hasSeenSelectedCases = true;
+          window.removeEventListener('scroll', checkSelectedCasesVisibility);
+        }
+      }
+
+      window.addEventListener('scroll', checkSelectedCasesVisibility);
+
         document.addEventListener('DOMContentLoaded', () => {
           const filterItems = document.querySelectorAll('#work-filter li');
           const projectCards = document.querySelectorAll('.project-card');

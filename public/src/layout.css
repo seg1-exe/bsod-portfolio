@@ -7,6 +7,7 @@
     h2{font-size: 28px;}
     h3{font-size: 20px;}
     #name{font-size: 20px;}
+    #work-filter li{font-size: 28px;}
 
     header>p{font-size: 128px;}
 
@@ -45,6 +46,7 @@
     h2{font-size: 24px;}
     h3{font-size: 20px;}
     #name{font-size: 20px;}
+    #work-filter li{font-size: 24px;}
 
     .project-card>a>img{
         width: 350px;
@@ -69,6 +71,7 @@
     }
     h1{font-size: 24px;}
     h2{font-size: 20px;}
+    #work-filter li{font-size: 20px;}
 
 
     .project-card>a>img{
@@ -172,6 +175,10 @@
     }
     .large-view{
         display: none;
+    }
+
+    .cases-list>a>img{
+        height: 70px;
     }
 
     footer{
