@@ -47,11 +47,23 @@
 @media (max-width: 1024px) {
     h1{font-size: 28px;}
     h2{font-size: 24px;}
-    h3{font-size: 16px;}
-    #name{font-size: 16px;}
+    h3{font-size: 20px;}
+    #name{font-size: 20px;}
 
     .project-card>a>img{
         width: 350px;
+    }
+
+    .study-case>section>h3, .study-case>section>img, .study-case>section>video{
+        width: 350px;
+    }
+
+    .study-case>section{
+        margin: 40px 0;
+    }
+
+    .cases-list>a>img{
+        height: 80px;
     }
 }
 
@@ -87,7 +99,7 @@
     }
 
     header{
-        height: 70vh;
+        height: 100vh;
     }
 
     .project-card{
@@ -134,5 +146,6 @@
 
     footer{
         margin: 50px 0 0 0;
+        font-size: 12px;
     }
 }

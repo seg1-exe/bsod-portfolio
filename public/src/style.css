@@ -437,13 +437,13 @@ footer a:nth-child(4) {animation-delay: 0.6s;}
 }
 
 .cases-list>a{
-    width: 45%;
+    width: 100%;
     display: flex;
     text-decoration: none;
 }
 
 .cases-list>a>img{
-    height: 150px;
+    height: 200px;
     margin-right: 20px;
 }
 
