@@ -38,10 +38,6 @@
     .study-case>section>h3, .study-case>section>img, .study-case>section>video{
         width: 500px;
     }
-
-    .cases-list>a>img{
-        height: 100px;
-    }
 }
 
 @media (max-width: 1024px) {
@@ -63,11 +59,14 @@
     }
 
     .cases-list>a>img{
-        height: 80px;
+        height: 200px;
     }
 }
 
 @media (max-width: 768px) {
+    #app{
+        padding: 32px 50px;
+    }
     h1{font-size: 24px;}
     h2{font-size: 20px;}
 
@@ -90,6 +89,28 @@
 
     .contact-internet>ul>li>a>i{
         font-size: 40px;
+    }
+
+    .study-case>.study-case-title{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .study-case>.study-case-title>img, .study-case>.study-case-title>section{
+        width: 48%;
+    }
+
+    .study-case>section{
+        flex-direction: column;
+    }
+
+    .study-case>section>h3, .study-case>section>img, .study-case>section>video{
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .cases-list>a>img{
+        height: 150px;
     }
 }
 
@@ -136,6 +157,15 @@
     .contact-internet{
         margin-top: 50px;
     }
+
+    .study-case>.study-case-title{
+        flex-direction: column;
+    }
+
+    .study-case>.study-case-title>img, .study-case>.study-case-title>section{
+        width: 100%;
+    }
+
 
     .mobile-view{
         display: block;
