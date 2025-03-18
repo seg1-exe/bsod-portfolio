@@ -452,3 +452,25 @@ footer a:nth-child(4) {animation-delay: 0.6s;}
     text-decoration: underline;
     margin-bottom: 10px;
 }
+
+#portfolio{
+    background-color: var(--blue);
+    height: 100vh;
+    color: var(--white);
+    font-family: 'Segoe UI', sans-serif;
+    transition: background-color 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+#portfolio>h2{
+    width: 60%;
+    text-align: justify;
+}
+
+#portfolio>embed{
+    width: 80%;
+    height: 80%;
+}

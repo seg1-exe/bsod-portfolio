@@ -71,7 +71,7 @@
     }
     h1{font-size: 24px;}
     h2{font-size: 20px;}
-    #work-filter li{font-size: 20px;}
+    #work-filter li{font-size: 20px; margin-right: 10px;}
 
 
     .project-card>a>img{
