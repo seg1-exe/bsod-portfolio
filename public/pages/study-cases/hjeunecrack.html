@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/icon.png" />
+    <link rel="stylesheet" href="/src/reset.css">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/layout.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/847debfb6c.js" crossorigin="anonymous"></script>
+    <title>Arthur Gillier</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="flair flair--3" id="cursorText"></div>
+      <div class="player-ctn">
+        <div class="btn-ctn">
+          <div class="btn-mute" id="toggleMute" onclick="toggleMute()">
+             <div id="btn-faws-volume">
+               <i id="icon-vol-up" class='fas fa-volume-up'></i>
+               <i id="icon-vol-mute" class='fas fa-volume-mute' style="display: none"></i>
+             </div>
+          </div>
+          <div class="music-info">
+            <div class="timer">00:00</div>
+            <div id="myProgress">
+              <div id="myBar"></div>
+            </div>
+            <div class="duration">02:35</div>
+          </div>
+        
+        </div>
+        <div class="player-infos">
+          <div class="title">Deuxième peau - H JeuneCrack</div>
+        </div>
+      </div>
+      <header>
+        <p class="animated-section-top">:)</p>
+        <h1 class="animated-section-left">Your PC ran into this case study and needs to explore it.</h1>
+        <h3 class="animated-section-left">For more info on : 1ER_MOUVEMENT_CASE_STUDY</h3>
+        <a class="animated-section-left" href="/pages/study-cases.html"><i class="fa-solid fa-arrow-left"></i> Go back</a>
+      </header>
+      <main class="hjeunecrack study-case">
+        <section class="study-case-title">
+            <img class="animated-section-left" src="/images/cases-img/hjeunecrack.png">
+            <section class="animated-section-right">
+                <h1>1er Mouvement</h1>
+                <h3>a creative website designed on <a href="https://www.figma.com/">Figma</a> and developed with <a href="https://vitejs.dev/">Vite.js</a></h3>
+            </section>
+        </section>
+
+        <section>
+            <h3 class="animated-section-left">To mark the release of <a href="https://www.instagram.com/hjeunecrack/">H JeuneCrack</a>'s 1er Mouvement project, I collaborated with skii and Claire to create a website analyzing the project. <a href="https://www.instagram.com/gothiclaire/">Claire</a>'s and <a href="https://www.instagram.com/skii.wav/">skii</a>'s writing talents were highlighted by the visuals created for the project's identity.</h2>
+            <img class="animated-section-right" src="/images/hjeunecrack/cover.webp">
+        </section>
+
+        <section>
+            <img class="animated-section-left" src="/images/hjeunecrack/tracklist.jpg">
+            <h3 class="animated-section-right">Accompanied by visuals by Lena Borghesi, Holow, KHA2, Étienne Saby, Marina Maruyama, Louna Aucomte and photos by Argenteurs, this analysis allows us to discover or rediscover this project from another angle. By listening to each track while reading the short analysis, you can discover the details of each phrase.</h2>
+        </section>
+
+        <section>
+            <h3 class="animated-section-left">Each track is illustrated by a photograph taken by Argenteurs, an analysis written by skii or Claire and a player for listening to the track.</h2>
+            <video controls class="animated-section-right video">
+                <source src="/images/hjeunecrack/kassded.mp4" type="video/mp4">
+            </video>
+        </section>
+
+        <section>
+            <video controls class="animated-section-right video">
+                <source src="/images/hjeunecrack/kaboul.mp4" type="video/mp4">
+            </video>
+            <h3 class="animated-section-right">As the tracks were clipped by Etienne Saby, they are illustrated by the latter, allowing you to visualize them while reading the analysis.</h2>
+        </section>
+
+        <section >
+            <h3 class="animated-section-left">The simplistic effect of the site and the emphasis on visuals was successful. Reading the texts and navigating between the pieces is pleasant and makes the project easier to understand.</h2>
+                <video controls class="animated-section-right video">
+                    <source src="/images/hjeunecrack/showcase.mp4" type="video/mp4">
+                </video>
+        </section>
+
+        <section>
+          <h3 class="animated-section-left">You can follow this <a href="https://1ermouvement.vercel.app/">link</a> to visit the website, and on this <a href="https://www.instagram.com/p/DIOyKp4sLK1/?img_index=1">link</a> the instagram post for it.</h3>
+        </section>
+
+        <section class="related-cases">
+            <h2 class="animated-section-left">Take a look at the next case</h3>
+            <div class="cases-list">
+              <a href="/pages/study-cases/la-bete.html">
+                <img src="/images/cases-img/labete.png">
+                <div>
+                  <h3>La Bête</h3>
+                  <p>Design and development work around the musical project “La Bête” by two French musical artists.</p>
+                </div>
+              </a>
+            </div>
+          </section>
+      </main>
+
+      <footer>
+        <a href="/index.html">Homepage</a>
+        <a href="/index.html#about">About</a>
+        <a href="/index.html#contact">Contact</a>
+        <a href="/pages/study-cases.html">Study cases</a>
+      </footer>
+    </div>
+  </body>
+  <script>
+    const music = new Audio('/images/hjeunecrack/deuxieme_peau.mp3');
+    const video = document.querySelector('.video');
+    const cursorText = document.getElementById('cursorText');
+    const titleElement = document.querySelector('.title');
+    const durationElement = document.querySelector('.duration');
+    const timerElement = document.querySelector('.timer');
+    const progressBar = document.getElementById('myBar');
+    const playerContainer = document.querySelector('.player-ctn');
+    
+    var isPlaying = false;
+    var wasMusicPlaying = false;
+    var isVideoPlaying = false;
+    var isSeeking = false;
+    music.loop = true;
+    cursorText.textContent = 'Click to enable sound';
+    
+    function playMusic() {
+      isPlaying ? music.pause() : music.play();
+    }
+
+    document.addEventListener('click', () => {
+      if (!isPlaying) {
+        playMusic();
+        playerContainer.classList.add('player-ctn-visible');
+      }
+      cursorText.style.display = "none"; 
+    });
+
+    music.onplaying = function () {
+      isPlaying = true;
+    };
+    
+    music.onpause = function () {
+      isPlaying = false;
+    };
+    
+    // mute function
+    window.toggleMute = function() {
+      const volUpIcon = document.getElementById('icon-vol-up');
+      const volMuteIcon = document.getElementById('icon-vol-mute');
+    
+      music.muted = !music.muted;
+      volUpIcon.style.display = music.muted ? 'none' : 'inline';
+      volMuteIcon.style.display = music.muted ? 'inline' : 'none';
+    };
+    
+    music.addEventListener('timeupdate', function() {
+      const currentTime = music.currentTime;
+      timerElement.textContent = getMinutes(currentTime);
+    
+      const progress = (currentTime / music.duration) * 100;
+      progressBar.style.width = progress + '%';
+    
+    });
+    
+    function getMinutes(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec.toString().padStart(2, '0')}`;
+    }
+    
+    video.addEventListener('play', () => {
+      isVideoPlaying = true;
+      if (isPlaying) {
+        wasMusicPlaying = true;
+        music.pause();
+        playIcon.style.display = 'inline';
+        pauseIcon.style.display = 'none';
+      } else {
+        wasMusicPlaying = false;
+      }
+    });
+
+    video.addEventListener('pause', () => {
+      if (!isSeeking && isVideoPlaying && wasMusicPlaying) {
+        music.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'inline';
+      }
+      isVideoPlaying = false;
+    });
+
+    video.addEventListener('seeking', () => {
+      isSeeking = true;
+    });
+
+    video.addEventListener('seeked', () => {
+      isSeeking = false;
+    });
+
+    video.addEventListener('ended', () => {
+      if (wasMusicPlaying) {
+        music.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'inline';
+      }
+      isVideoPlaying = false;
+    });
+  </script>
+  <script src="/src/main.js"></script>
+  <script src="/src/gsap.js" type="module"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</html>
