@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainElement = document.querySelector('.study-case');
   let mainSeen = false;
   let count = 0;
-  const maxCount = 80;
+  const maxCount = 30;
   const intervalTime = 60;
 
   function checkMainVisibility() {
